@@ -46,7 +46,7 @@ sub share_dir
         ->dir
         ->parent
         ->parent
-        ->subdir('public');
+        ->subdir('share');
     }
   }
   
