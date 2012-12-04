@@ -53,4 +53,19 @@ sub share_dir
   $path;
 }
 
+sub get_data
+{
+  my $data = {
+    js                  => [],
+    title               => 'PlugAuth WebUI',
+    description         => 'PlugAuth server Web user interface',
+    plugauth_webui_data => {},
+  };
+  foreach my $js (grep { $_->basename =~ /^pawu-.*\.js$/} __PACKAGE__->share_dir->subdir('js')->children( no_hidden => 1))
+  {
+    push $data->{js}, $js->basename;
+  }
+  $data;
+}
+
 1;
