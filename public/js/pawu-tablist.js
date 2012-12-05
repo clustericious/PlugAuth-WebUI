@@ -4,6 +4,19 @@ if(PlugAuth.UI === undefined) PlugAuth.UI = {};
 (function ()
 {
 
+  var max_label_length = 25;
+
+  var label = function(name)
+  {
+    var label = name;
+    if(label.length > max_label_length)
+    {
+      label = label.substr(0,max_label_length-3);
+      label += '...';
+    }
+    return label;
+  }
+  
   PlugAuth.UI.TabList = function(list)
   {
     var nav_html = '';
@@ -15,19 +28,20 @@ if(PlugAuth.UI === undefined) PlugAuth.UI = {};
     $.each(list, function(index, value) {
       nav_html += '<li id="plugauth_webui_tab_nav_' + index + '">'
       +           '<a id="plugauth_webui_tab_nav_a_' + index + '" href="#plugauth_webui_tab_content_' + index + '" data-toggle="tab">'
-      +           value + '</a></li>';
+      +           label(value) + '</a></li>';
       pane_html += '<div class="tab-pane" id="plugauth_webui_tab_content_' + index + '"></div>';
     });
     
-    $('#plugauth_webui_container').html('<div class="navbar"><div class="navbar-inner"><form class="navbar-form pull-left">'
+    $('#plugauth_webui_toolbar').html('<form class="navbar-form pull-left">'
     +                                   '<input type="text" class="span2" placeholder="Search" id="plugauth_webui_tab_search">'
     +                                   '</form><form class="navbar-form pull-left">'
     +                                   '<button class="btn" id="plugauth_webui_tab_create">new user</button>'
-    +                                   '</form></div></div>'
-    +                                   '<div class="tabbable tabs-left">'
-    +                                   '<ul class="nav nav-tabs">'
+    +                                   '</form>');
+    
+    $('#plugauth_webui_container').html('<div class="tabbable tabs-left">'
+    +                                   '<ul class="nav nav-tabs" id="plugauth_webui_tab_nav">'
     +                                   nav_html + '</ul>'
-    +                                   '<div class="tab-content">'
+    +                                   '<div class="tab-content" id="plugauth_webui_tab_content">'
     +                                   pane_html + '</div></div>');
     
     this.callback = function() {};
@@ -42,9 +56,6 @@ if(PlugAuth.UI === undefined) PlugAuth.UI = {};
     $('#plugauth_webui_tab_form').submit(function() { return false });
     $('#plugauth_webui_tab_search').change(function() { tl.search($('#plugauth_webui_tab_search').val()); return false });
     $('#plugauth_webui_tab_create').click(function() { tl.create(); return false });
-    
-    $('#plugauth_webui_user_nav_0').addClass('active');
-    $('#plugauth_webui_user_content_0').addClass('active');
   }
   
   PlugAuth.UI.TabList.prototype.search = function(text)
@@ -59,6 +70,30 @@ if(PlugAuth.UI === undefined) PlugAuth.UI = {};
       else
       {
         $('#plugauth_webui_tab_nav_' + index).show();
+      }
+    });
+  }
+  
+  PlugAuth.UI.TabList.prototype.append = function(value)
+  {
+    var index = this.list.length;
+    $('#plugauth_webui_tab_nav').append('<li id="plugauth_webui_tab_nav_' + index + '">'
+      +                                 '<a id="plugauth_webui_tab_nav_a_' + index + '" href="#plugauth_webui_tab_content_' + index + '" data-toggle="tab">'
+      +                                 label(value) + '</a></li>');
+    $('#plugauth_webui_tab_content').append('<div class="tab-pane" id="plugauth_webui_tab_content_' + index + '"></div>');
+    this.list.push(value);
+    var tl = this;
+    var content = $('#plugauth_webui_tab_content_'+index);
+    $('#plugauth_webui_tab_nav_a_' + index).click(function() { tl.callback(value, content); return true });
+  }
+  
+  PlugAuth.UI.TabList.prototype.remove = function(search_value)
+  {
+    $.each(this.list, function(index, value) {
+      if(value == search_value)
+      {
+        $('#plugauth_webui_tab_nav_' + index).remove();
+        $('#plugauth_webui_tab_content_' + index).remove();
       }
     });
   }

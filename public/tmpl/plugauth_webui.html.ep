@@ -42,7 +42,13 @@
     <div class="container">
 
       <div class="row">
-        <div class="span12" id="plugauth_webui_container">
+        <div class="span12">
+        
+          <div class="navbar">
+            <div class="navbar-inner" id="plugauth_webui_toolbar" ></div>
+          </div>
+          <div id="plugauth_webui_container"></div>
+        
         </div>
       </div>
 

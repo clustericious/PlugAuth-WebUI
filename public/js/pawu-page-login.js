@@ -1,71 +1,77 @@
 if(PlugAuth === undefined) var PlugAuth = {};
 if(PlugAuth.UI === undefined) PlugAuth.UI = {};
-if(PlugAuth.UI.Page === undefined) PlugAuth.UI.Page = {};
-if(PlugAuth.UI.Page.Login === undefined) PlugAuth.UI.Page.Login = {};
 
 (function ()
 {
-  var page = PlugAuth.UI.Page.Login;
+  var page = PlugAuth.UI.login = {};
 
   page.enable = function()
   {
-    $('#plugauth_webui_container').html('<form><table>' +
-                                        '<tr><th>user</td><td><input id="plugauth_webui_login_user" name="user" /></td><tr>' +
-                                        '<tr><th>pass</td><td><input id="plugauth_webui_login_pass" name="pass" /></td><tr>' +
-                                        '</table></form>');
-    $('#plugauth_webui_main_menu').html('');
-    $('#plugauth_webui_login_user').focus();
-    $('#plugauth_webui_login_user').keypress(page.user_key_press);
-    $('#plugauth_webui_login_pass').keypress(page.pass_key_press);
+    $('#plugauth_webui_container').html('<form>'
+    +                                   '<input id="plugauth_webui_login_user" name="user" type="text"     placeholder="username" />'
+    +                                   '<br/>'
+    +                                   '<input id="plugauth_webui_login_pass" name="pass" type="password" placeholder="password" />'
+    +                                   '</form>');
+    $('#plugauth_webui_toolbar').html('');
+    PlugAuth.UI.Menu.clear();
+    var user = $('#plugauth_webui_login_user');
+    var pass = $('#plugauth_webui_login_pass');
+    user.focus();
+    
+    user.keypress(function(event) {
+      if(event.which == 10 || event.which == 13)
+      {
+        pass.focus();
+        return false;
+      }
+      return true;
+    });
+    
+    pass.keypress(function(event) {
+      if(event.which == 10 || event.which == 13)
+      {
+        page.attempt(user.val(), pass.val());
+        return false;
+      }
+      return true;
+    });
   }
   
-  page.user_key_press = function(aEvent)
-  {
-    if(aEvent.which == 10 || aEvent.which == 13)
-    {
-      $('#plugauth_webui_login_pass').focus();
-      return false;
-    }
-    return true;
-  }
-  
-  page.pass_key_press = function (aEvent)
-  {
-    if(aEvent.which == 10 || aEvent.which == 13)
-    {
-      page.attempt();
-      return false;
-    }
-    return true;
-  }
-  
-  page.attempt = function()
+  page.attempt = function(user, pass)
   {
     var client = new PlugAuth.Client(PlugAuth.UI.data.api_url);
-    client.login($('#plugauth_webui_login_user').val(), $('#plugauth_webui_login_pass').val());
+    client.login(user,pass);
     client.auth()
           .success(function() { page.success(client) })
           .error  (page.error);
   }
   
-  page.success = function(aClient)
+  page.success = function(client)
   {
     $('#plugauth_webui_container').html('<p>you are logged in!</p>');
-        
-    PlugAuth.UI.Page.User.enable(aClient);
     
-    $('#plugauth_webui_main_menu').append('<li><a href="#" id="plugauth_webui_menu_logout">logout</a></li>');
-    $('#plugauth_webui_menu_logout').click(page.logout);
+    var pages = PlugAuth.UI.pages.sort(function(a,b) { return a.order - b.order });
+    
+    $.each(pages, function(index, page) {
+      page.enable(client);
+    });
+    
+    var menu = new PlugAuth.UI.Menu.MenuItem('logout');
+    menu.click(page.enable);
+    menu.show();
   }
-  
-  page.logout = function()
-  {
-    page.enable();
-  }
-  
-  page.error = function()
-  {
-    alert('bad');
-  }
+
+  $(document).ready(function() {
+    var login_error_modal = new PlugAuth.UI.Modal('Authentication Error');
+    login_error_modal.html('<p>Either the credentials you provided were wrong, or there was an error in transport with the PlugAuth server.</p>'
+      +                    '<p>Response: <span class="badge badge-important" id="plugauth_webui_login_error_status"></span>'
+      +                    '             <span id="plugauth_webui_login_error_data"></span></p>');
+    page.error = function(data, status)
+    {
+      $('#plugauth_webui_login_error_status').html(status);
+      $('#plugauth_webui_login_error_data').html(data);
+      login_error_modal.show();
+    };
+  });
 
 })();
