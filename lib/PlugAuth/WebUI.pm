@@ -53,6 +53,12 @@ sub share_dir
   $path;
 }
 
+=head2 PlugAuth::WebUI->get_data
+
+Returns the stash data needed to generate the html from the ep template.
+
+=cut
+
 sub get_data
 {
   my $data = {
@@ -69,3 +75,30 @@ sub get_data
 }
 
 1;
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2012 by NASA GSFC.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=head2 jQuery
+
+Copyright (c) 2012 jQuery Foundation and other contributors, http://jquery.org/
+
+Licensed under the MIT License
+
+=head2 jQuery base64 plugin
+
+Original code (c) 2010 Nick Galbreath
+
+Licensed under the MIT License
+
+=head2 Twitter Bootstrap
+
+Copyright 2012 Twitter, Inc.
+
+Licensed under the Apache 2.0 License
+
+=cut
