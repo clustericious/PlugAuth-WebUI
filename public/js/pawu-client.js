@@ -14,6 +14,13 @@ if(PlugAuth === undefined) var PlugAuth = {};
     return this;
   }
   
+  PlugAuth.Client.prototype.logout = function()
+  {
+    delete this.user;
+    delete this.pass;
+    return this;
+  }
+  
   var request = function(client, args)
   {
     args = jQuery.extend({}, args);
@@ -89,9 +96,14 @@ if(PlugAuth === undefined) var PlugAuth = {};
     });
   }
   
-  PlugAuth.Client.prototype.user = function()
+  PlugAuth.Client.prototype.can = function(aAction, aResource)
+  {
+    return this.authz(this.user, aAction, aResource);
+  }
+  
+  PlugAuth.Client.prototype.user_list = function()
   { return request(this, { url: '/user', type:  'GET' }) }
-  PlugAuth.Client.prototype.group = function()
+  PlugAuth.Client.prototype.group_list = function()
   { return request(this, { url: '/group', type: 'GET' }) }
   
   PlugAuth.Client.prototype.create_user = function(aUsername, aPassword)

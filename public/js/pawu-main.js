@@ -6,9 +6,9 @@ if(PlugAuth.UI === undefined) PlugAuth.UI = {};
 
   $(document).ready(function(){
   
-    var data = JSON.parse($('#plugauth_webui_data').val());
+    PlugAuth.UI.data = JSON.parse($('#plugauth_webui_data').val());
     
-    var client = new PlugAuth.Client(data.api_url);
+    var client = new PlugAuth.Client(PlugAuth.UI.data.api_url);
     
     /* 
     client.version()
@@ -32,6 +32,8 @@ if(PlugAuth.UI === undefined) PlugAuth.UI = {};
       .success(function(data, status) { alert("foo: good\n" + "data = " + data + "\nstatus = " + status ) })
       .error  (function(data, status) { alert("foo: bad\n"  + "data = " + data + "\nstatus = " + status ) });
     */
+    
+    PlugAuth.UI.Page.Login.enable();
   });
 
 })();

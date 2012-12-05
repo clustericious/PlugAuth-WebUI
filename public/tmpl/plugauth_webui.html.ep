@@ -28,7 +28,11 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="<%= url_for 'plugauth_webui' %>">PlugAuth WebUI</a>
+          <a class="brand" href="#">PlugAuth WebUI</a>
+          <div class="nav-collapse">
+            <ul class="nav" id="plugauth_webui_main_menu">
+            </ul>
+          </div><!--/.nav-collapse -->
         </div>
       </div>
     </div>
@@ -38,8 +42,7 @@
     <div class="container">
 
       <div class="row">
-        <div class="span12">
-          <p>Hi there!</p>
+        <div class="span12" id="plugauth_webui_container">
         </div>
       </div>
 
