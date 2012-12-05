@@ -21,8 +21,8 @@ if(PlugAuth.UI.Menu === undefined) PlugAuth.UI.Menu = {};
     var mi = this;
     this.li.hide();
     this.a.click(function() { 
-      $('.plugauth_webui_menu_item').removeClass('active');
-      mi.li.addClass('active'); 
+      PlugAuth.UI.Menu.deselect();
+      mi.select();
       mi.cb(); 
       return false;
     });
@@ -32,10 +32,16 @@ if(PlugAuth.UI.Menu === undefined) PlugAuth.UI.Menu = {};
   PlugAuth.UI.Menu.MenuItem.prototype.hide = function () { this.li.hide() }
   PlugAuth.UI.Menu.MenuItem.prototype.show = function () { this.li.show() }
   PlugAuth.UI.Menu.MenuItem.prototype.click = function (cb) { this.cb = cb }
+  PlugAuth.UI.Menu.MenuItem.prototype.select = function () { this.li.addClass('active') }
   
   PlugAuth.UI.Menu.clear = function()
   {
     $('#plugauth_webui_main_menu').html('');
+  }
+  
+  PlugAuth.UI.Menu.deselect = function()
+  {
+    $('.plugauth_webui_menu_item').removeClass('active');
   }
 
 })();

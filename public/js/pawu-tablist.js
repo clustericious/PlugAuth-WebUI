@@ -87,6 +87,19 @@ if(PlugAuth.UI === undefined) PlugAuth.UI = {};
     $('#plugauth_webui_tab_nav_a_' + index).click(function() { tl.callback(value, content); return true });
   }
   
+  PlugAuth.UI.TabList.prototype.prepend = function(value)
+  {
+    var index = this.list.length;
+    $('#plugauth_webui_tab_nav').prepend('<li id="plugauth_webui_tab_nav_' + index + '">'
+      +                                 '<a id="plugauth_webui_tab_nav_a_' + index + '" href="#plugauth_webui_tab_content_' + index + '" data-toggle="tab">'
+      +                                 label(value) + '</a></li>');
+    $('#plugauth_webui_tab_content').prepend('<div class="tab-pane" id="plugauth_webui_tab_content_' + index + '"></div>');
+    this.list.push(value);
+    var tl = this;
+    var content = $('#plugauth_webui_tab_content_'+index);
+    $('#plugauth_webui_tab_nav_a_' + index).click(function() { tl.callback(value, content); return true });
+  }
+  
   PlugAuth.UI.TabList.prototype.remove = function(search_value)
   {
     $.each(this.list, function(index, value) {
@@ -94,6 +107,26 @@ if(PlugAuth.UI === undefined) PlugAuth.UI = {};
       {
         $('#plugauth_webui_tab_nav_' + index).remove();
         $('#plugauth_webui_tab_content_' + index).remove();
+      }
+    });
+  }
+  
+  PlugAuth.UI.TabList.prototype.select = function(search_value)
+  {
+    var tl = this;
+    $.each(this.list, function(index, value) {
+      var nav = $('#plugauth_webui_tab_nav_' + index);
+      var content = $('#plugauth_webui_tab_content_' + index);
+      if(value == search_value)
+      {
+        nav.addClass('active');
+        content.addClass('active');
+        tl.callback(value, content)
+      }
+      else
+      {
+        nav.removeClass('active');
+        content.removeClass('active');
       }
     });
   }

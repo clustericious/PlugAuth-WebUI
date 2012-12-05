@@ -4,7 +4,7 @@ $(document).ready(function ()
   create_user_modal.html('<form id="plugauth_webui_create_user_form">'
     +                    '<input id="plugauth_webui_create_user_name"    name="user"    type="text"     placeholder="username" /><br/>'
     +                    '<input id="plugauth_webui_create_user_pass"    name="pass"    type="password" placeholder="password" /><br/>'
-    +                    '<input id="plugauth_webui_create_user_confirm" name="confirm" type="password" placeholder="confirm" />'
+    +                    '<input id="plugauth_webui_create_user_confirm" name="confirm" type="password" placeholder="confirm"  />'
     +                    '</form>'
     +                    '<p id="plugauth_webui_create_user_message"></p>');
 
@@ -28,6 +28,12 @@ $(document).ready(function ()
     $('#plugauth_webui_container').html('<p>wait</p>');
     var client = this.client;
     client.user_list()
+      .error(function() {
+        $('#plugauth_webui_container').html('');
+        PlugAuth.UI.error_modal.html('<p>Unable to retrieve user list</p>');
+        PlugAuth.UI.error_modal.show();
+        PlugAuth.UI.Menu.deselect();
+      })
       .success(function(data) {
         
         var tl = new PlugAuth.UI.TabList(data);
@@ -114,7 +120,8 @@ $(document).ready(function ()
               })
               .success(function () {
                 create_user_modal.hide();
-                tl.append(create_user_modal.user.val());
+                tl.prepend(create_user_modal.user.val());
+                tl.select(create_user_modal.user.val());
               });
         };
         

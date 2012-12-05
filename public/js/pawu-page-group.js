@@ -5,6 +5,12 @@ $(document).ready(function ()
   {
     $('#plugauth_webui_container').html('<p>wait</p>');
     this.client.group_list()
+      .error(function() {
+        $('#plugauth_webui_container').html('');
+        PlugAuth.UI.error_modal.html('<p>Unable to retrieve group list</p>');
+        PlugAuth.UI.error_modal.show();
+        PlugAuth.UI.Menu.deselect();
+      })
       .success(function(data) {
         
         var tl = new PlugAuth.UI.TabList(data);
