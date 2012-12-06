@@ -93,6 +93,8 @@ Licensed under the MIT License
 
 Original code (c) 2010 Nick Galbreath
 
+jQuery port (c) 2010 Carlo Zottmann
+
 Licensed under the MIT License
 
 =head2 Twitter Bootstrap
