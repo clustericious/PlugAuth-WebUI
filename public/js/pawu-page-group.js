@@ -1,8 +1,6 @@
 /*
  * FIXME: double click to add/remove single user
- * FIXME: sort user names
  * FIXME: create_group
- * FIXME: new user label should be new group
  */
 
 $(document).ready(function ()
@@ -28,7 +26,7 @@ $(document).ready(function ()
     page.client.user_list()
       .success(function(data) {
         count++;
-        user_out = data;
+        user_out = data.sort();
         if(count == 2)
         {
           fixup();
@@ -39,7 +37,7 @@ $(document).ready(function ()
     page.client.users(group)
       .success(function(data) {
         count++;
-        user_in = data;
+        user_in = data.sort();
         if(count == 2)
         {
           fixup();
@@ -63,7 +61,7 @@ $(document).ready(function ()
       })
       .success(function(data) {
         
-        var tl = new PlugAuth.UI.TabList(data);
+        var tl = new PlugAuth.UI.TabList(data, { new_label: 'New Group' });
         tl.callback = function(group, pane) {
           get_user_lists(group, function(user_in, user_out) {
             var id = 'plugauth_webui_group_membership_' +  counter++;

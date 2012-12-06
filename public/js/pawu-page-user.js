@@ -36,7 +36,7 @@ $(document).ready(function ()
       })
       .success(function(data) {
         
-        var tl = new PlugAuth.UI.TabList(data);
+        var tl = new PlugAuth.UI.TabList(data, { new_label: 'New User' });
         tl.callback = function(user, pane) {
           var index = counter++;
           pane.html('<h3>' + user + '</h3>'
