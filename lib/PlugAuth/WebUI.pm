@@ -69,7 +69,7 @@ sub get_data
   };
   foreach my $js (grep { $_->basename =~ /^pawu-.*\.js$/} __PACKAGE__->share_dir->subdir('js')->children( no_hidden => 1))
   {
-    push $data->{js}, $js->basename;
+    push @{ $data->{js} }, $js->basename;
   }
   $data;
 }
