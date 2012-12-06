@@ -2,6 +2,7 @@
  * FIXME: double click to add/remove single user
  * FIXME: sort user names
  * FIXME: create_group
+ * FIXME: new user label should be new group
  */
 
 $(document).ready(function ()
