@@ -18,22 +18,9 @@ if(PlugAuth.UI === undefined) PlugAuth.UI = {};
     var pass = $('#plugauth_webui_login_pass');
     user.focus();
     
-    user.keypress(function(event) {
-      if(event.which == 10 || event.which == 13)
-      {
-        pass.focus();
-        return false;
-      }
-      return true;
-    });
-    
-    pass.keypress(function(event) {
-      if(event.which == 10 || event.which == 13)
-      {
-        page.attempt(user.val(), pass.val());
-        return false;
-      }
-      return true;
+    $(document).ready(function() {
+      PlugAuth.UI.bind_enter(user, function() { pass.focus() });
+      PlugAuth.UI.bind_enter(pass, function() { page.attempt(user.val(), pass.val()) });
     });
   }
   

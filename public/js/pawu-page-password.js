@@ -48,23 +48,9 @@ $(document).ready(function ()
     
     submit.click(change_password);
     
-    password.keypress(function(event) {
-      if(event.which == 10 || event.which == 13)
-      {
-        confirm.focus();
-        return false;
-      }
-      return true;
-    });
-    
-    confirm.keypress(function(event) {
-      if(event.which == 10 || event.which == 13)
-      {
-        change_password();
-        return false;
-      }
-      return true;
-    });
+    PlugAuth.UI.bind_enter(password, function() { confirm.focus() });
+    PlugAuth.UI.bind_enter(confirm,  change_password);
+
   }
   page.order = 40;
   

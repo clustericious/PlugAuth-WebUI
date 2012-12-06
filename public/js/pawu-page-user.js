@@ -161,32 +161,9 @@ $(document).ready(function ()
   create_user_modal.on('shown', function() {
     create_user_modal.user.focus();
   });
-  
-  create_user_modal.user.keypress(function(event) {
-    if(event.which == 10 || event.which == 13)
-    {
-      create_user_modal.pass.focus();
-      return false;
-    }
-    return true;
-  });
-  
-  create_user_modal.pass.keypress(function(event) {
-    if(event.which == 10 || event.which == 13)
-    {
-      create_user_modal.confirm.focus();
-      return false;
-    }
-    return true;
-  });
-  
-  create_user_modal.confirm.keypress(function(event) {
-    if(event.which == 10 || event.which == 13)
-    {
-      page.create_user();
-      return false;
-    }
-    return true;
-  });
+
+  PlugAuth.UI.bind_enter(create_user_modal.user, function() { create_user_modal.pass.focus() });
+  PlugAuth.UI.bind_enter(create_user_modal.pass, function() { create_user_modal.confirm.focus() });
+  PlugAuth.UI.bind_enter(create_user_modal.confirm, function() { page.create_user() });
 
 });

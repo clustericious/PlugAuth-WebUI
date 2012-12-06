@@ -63,8 +63,11 @@ if(PlugAuth.UI === undefined) PlugAuth.UI = {};
     });
     
     $('#plugauth_webui_tab_form').submit(function() { return false });
-    $('#plugauth_webui_tab_search').change(function() { tl.search($('#plugauth_webui_tab_search').val()); return false });
     $('#plugauth_webui_tab_create').click(function() { tl.create(); return false });
+    var input = $('#plugauth_webui_tab_search');
+    var search = function() { tl.search(input.val()); return false };
+    input.change(search);
+    PlugAuth.UI.bind_enter(input, search);
   }
   
   PlugAuth.UI.TabList.prototype.search = function(text)
