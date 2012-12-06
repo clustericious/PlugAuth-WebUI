@@ -41,11 +41,12 @@ $(document).ready(function ()
           var index = counter++;
           pane.html('<h3>' + user + '</h3>'
           +         '<form id="plugauth_webui_change_password_' + index + '_form">'
-          +         '<input type="password" placeholder="password" id="plugauth_webui_change_password_' + index + '_password" /><br/>'
-          +         '<input type="password" placeholder="confirm"  id="plugauth_webui_change_password_' + index + '_confirm"/><br/>'
-          +         '<button class="btn btn-primary" type="button" id="plugauth_webui_change_password_' + index + '_submit">Change Password</button>'
-          +         '</form>'
-          +         '<button class="btn btn-danger" id="plugauth_webui_remove_user_button_' + index + '">Remove User</button>');
+          +         '<input class="span3" type="password" placeholder="password" id="plugauth_webui_change_password_' + index + '_password" /><br/>'
+          +         '<input class="span3" type="password" placeholder="confirm"  id="plugauth_webui_change_password_' + index + '_confirm"/><br/>'
+          +         '<button class="span3 btn btn-primary" type="button" id="plugauth_webui_change_password_' + index + '_submit" style="margin-left:0">Change Password</button><br/>'
+          +         '<br/>'
+          +         '<button class="span3 btn btn-danger" id="plugauth_webui_remove_user_button_' + index + '" style="margin-left:0" >Remove User</button>'
+          +         '</form>');
           
           var change_password_widgets = $.map([ 'password', 'confirm', 'submit' ], function(value, mapindex) {
             var widget = $('#plugauth_webui_change_password_' + index + '_' + value);

@@ -5,9 +5,9 @@ $(document).ready(function ()
   {
     $('#plugauth_webui_container').html('<h3>' + page.client.user + '<h3>'
     +                                   '<form id="plugauth_webui_change_password_form">'
-    +                                   '<input type="password" placeholder="password" id="plugauth_webui_change_password_password" /><br/>'
-    +                                   '<input type="password" placeholder="confirm"  id="plugauth_webui_change_password_confirm"/><br/>'
-    +                                   '<button class="btn btn-primary" type="button" id="plugauth_webui_change_password_submit">Change Password</button>'
+    +                                   '<input class="span3" type="password" placeholder="password" id="plugauth_webui_change_password_password" /><br/>'
+    +                                   '<input class="span3" type="password" placeholder="confirm"  id="plugauth_webui_change_password_confirm"/><br/>'
+    +                                   '<button class="span3 btn btn-primary" type="button" id="plugauth_webui_change_password_submit" style="margin-left:0">Change Password</button>'
     +                                   '</form>');
     
     

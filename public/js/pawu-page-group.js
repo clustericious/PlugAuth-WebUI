@@ -1,5 +1,6 @@
 /*
  * FIXME: create_group
+ * FIXME: label for in/out lists
  */
 
 $(document).ready(function ()
