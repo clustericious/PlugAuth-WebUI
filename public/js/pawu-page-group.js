@@ -1,5 +1,4 @@
 /*
- * FIXME: double click to add/remove single user
  * FIXME: create_group
  */
 
@@ -93,12 +92,56 @@ $(document).ready(function ()
             _in.all.click( function() { $('#' + id + '_in_list option') .attr("selected","selected"); return false });
             _out.all.click(function() { $('#' + id + '_out_list option').attr("selected","selected"); return false });
             
-            var refresh = function() {
+            var remove_single_user = function()
+            {
+              // FIXME
+              var user = this.text;
+              var option = this;
+              page.client.group_delete_user(group, user)
+                .error(function() {
+                  PlugAuth.UI.error_modal.html('<p>Unable to remove user from group</p>');
+                  PlugAuth.UI.error_modal.show();
+                })
+                .success(function() {
+                  option.parentNode.remove(option.index);
+                  var option_id = id + '_option_' + counter++;
+                  _out.list.prepend('<option id="' + option_id + '">' + user + '</option>');
+                  $('#' + option_id).dblclick(add_single_user);
+                });
+              return false;
+            }
+            
+            var add_single_user = function()
+            {
+              // FIXME
+              var user = this.text;
+              var option = this;
+              page.client.group_add_user(group, user)
+                .error(function() {
+                  PlugAuth.UI.error_modal.html('<p>Unable to add user to group</p>');
+                  PlugAuth.UI.error_modal.show();
+                })
+                .success(function() {
+                  option.parentNode.remove(option.index);
+                  var option_id = id + '_option_' + counter++;
+                  _in.list.prepend('<option id="' + option_id + '">' + user + '</option>');
+                  $('#' + option_id).dblclick(remove_single_user);
+                });
+              return false;
+            }
+            
+            $('#' + id + '_in_list option').dblclick(remove_single_user);
+            $('#' + id + '_out_list option').dblclick(add_single_user);
+            
+            var refresh = function() 
+            {
               get_user_lists(group, function(new_user_in, new_user_out) {
                 user_in = new_user_in;
                 user_out = new_user_out;
                 _in .list.html($.map(user_in,  function(value) { return '<option>' + value + '</option>' }).join(''));
                 _out.list.html($.map(user_out, function(value) { return '<option>' + value + '</option>' }).join(''));
+                $('#' + id + '_in_list option').dblclick(remove_single_user);
+                $('#' + id + '_out_list option').dblclick(add_single_user);
               });
             };
             

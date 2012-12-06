@@ -157,12 +157,26 @@ if(PlugAuth === undefined) var PlugAuth = {};
     });
   }
 
+  PlugAuth.Client.prototype.group_add_user = function(aGroupname, aUser)
+  {
+    return request(this, {
+      url: '/group/' + aGroupname + '/' + aUser,
+      type: 'POST',
+    });
+  }
+  
+  PlugAuth.Client.prototype.group_delete_user = function(aGroupname, aUser)
+  {
+    return request(this, {
+      url: '/group/' + aGroupname + '/' + aUser,
+      type: 'DELETE',
+    });
+  }  
+
   /* TODO
   
      create_group => POST /group { group => 'group', users => 'one,two' }
      delete_group => DELETE /group/:group
-     group_add_user => POST /group/:group/:user
-     group_delete_user => DELETE /group/:group/:user
      
      grant => POST /grant/:user/:action/:resource
      revoke => DELETE /grant/:user/:action/:resource
