@@ -147,11 +147,19 @@ if(PlugAuth === undefined) var PlugAuth = {};
       type: 'GET',
     });
   }
+  
+  PlugAuth.Client.prototype.update_group = function(aGroupname, aUserlist)
+  {
+    return request(this, {
+      url:  '/group/' + aGroupname,
+      type: 'POST',
+      data: { users: aUserlist.join(',') },
+    });
+  }
 
   /* TODO
   
      create_group => POST /group { group => 'group', users => 'one,two' }
-     update_group => POST /group/:group { users => 'one,two' }
      delete_group => DELETE /group/:group
      group_add_user => POST /group/:group/:user
      group_delete_user => DELETE /group/:group/:user
