@@ -1,15 +1,10 @@
-/*
- * FIXME: delete_group
- * FIXME: label for in/out lists
- */
-
 $(document).ready(function ()
 {
   var create_group_modal = new PlugAuth.UI.Modal('New Group');
   create_group_modal.html('<form id="plugauth_webui_create_group_form">'
   +                       '<input name="group" type="text" placeholder="group name" />'
   +                       '<br/>'
-  +                       '<select multiple="multiple" size="15" class="span2" id=""></select>'
+  +                       '<select multiple="multiple" size="15" class="span3" id=""></select>'
   +                       '</form>'
   +                       '<p id="plugauth_webui_create_group_message"></p>');
   create_group_modal.create_button = create_group_modal.add_button('Create', 'btn-primary');
@@ -22,6 +17,12 @@ $(document).ready(function ()
   create_group_modal.on('shown', function() {
     create_group_modal.groupname.focus();
   });
+  
+  remove_group_modal = new PlugAuth.UI.Modal('Remove User');
+  remove_group_modal.html('<p>Please confirm removal of user <span id="plugauth_webui_remove_user_name"></span></p>');
+  remove_group_modal.confirm = remove_group_modal.add_button('Remove', 'btn-danger');
+  remove_group_modal.confirmed = function() { };
+  remove_group_modal.confirm.click(function () { remove_group_modal.confirmed() });
 
   var page = new PlugAuth.UI.Page('groups', 'accounts', 'group');
   
@@ -85,18 +86,20 @@ $(document).ready(function ()
             var id = 'plugauth_webui_group_membership_' +  counter++;
             pane.html('<h3>' + group + '<h3>'
             +         '<form>'
-            +         '<select multiple="multiple" size="15" class="span2" id="' + id + '_in_list">'
+            +         '<select multiple="multiple" size="15" class="span3" id="' + id + '_in_list">'
             +         $.map(user_in, function(value) { return '<option>' + value + '</option>' }).join('')
             +         '</select>'
-            +         '<select multiple="multiple" size="15" class="span2" id="' + id + '_out_list">'
+            +         '<select multiple="multiple" size="15" class="span3" id="' + id + '_out_list">'
             +         $.map(user_out, function(value) { return '<option>' + value + '</option>' }).join('')
             +         '</select>'
             +         '<br/>'
-            +         '<button class="btn btn-danger span2" style="margin-left:0" id="' + id + '_remove_button">Remove Selected</button>'
-            +         '<button class="btn btn-success span2" style="margin-left:0" id="' + id + '_add_button">Add Selected</button>'
+            +         '<button class="btn btn-danger span3" style="margin-left:0" id="' + id + '_remove_button">Remove Selected</button>'
+            +         '<button class="btn btn-success span3" style="margin-left:0" id="' + id + '_add_button">Add Selected</button>'
             +         '<br/>'
-            +         '<button class="btn span2" style="margin-left:0" id="' + id + '_select_all_remove_button">Select All</button>'
-            +         '<button class="btn span2" style="margin-left:0" id="' + id + '_select_all_add_button">Select All</button>'
+            +         '<button class="btn span3" style="margin-left:0" id="' + id + '_select_all_remove_button">Select All</button>'
+            +         '<button class="btn span3" style="margin-left:0" id="' + id + '_select_all_add_button">Select All</button>'
+            +         '<br/>'
+            +         '<button class="btn btn-danger span3" style="margin-left:0; margin-top:20px;" id="' + id + '_remove_group_button">Remove Group</button>'
             +         '</form>');
             var _in = {
               list: $('#' + id + '_in_list'),
@@ -111,9 +114,12 @@ $(document).ready(function ()
             _in.all.click( function() { $('#' + id + '_in_list option') .attr("selected","selected"); return false });
             _out.all.click(function() { $('#' + id + '_out_list option').attr("selected","selected"); return false });
             
+            $('#' + id + '_remove_group_button').click(function() {
+              page.remove_group(group);
+            });
+            
             var remove_single_user = function()
             {
-              // FIXME
               var user = this.text;
               var option = this;
               page.client.group_delete_user(group, user)
@@ -132,7 +138,6 @@ $(document).ready(function ()
             
             var add_single_user = function()
             {
-              // FIXME
               var user = this.text;
               var option = this;
               page.client.group_add_user(group, user)
@@ -230,6 +235,24 @@ $(document).ready(function ()
                 tl.prepend(group);
                 tl.select(group);
             });
+        }
+        
+        page.remove_group = function(group) {
+        
+          remove_group_modal.confirmed = function()
+          {
+            page.client.delete_group(group)
+              .error(function() {
+                remove_group_modal.hide();
+                PlugAuth.UI.error_modal.html('<p>Unable to create group</p>');
+                PlugAuth.UI.error_modal.show();
+              })
+              .success(function() {
+                remove_group_modal.hide();
+                tl.remove(group);
+              });
+          };
+          remove_group_modal.show();
         }
         
       });

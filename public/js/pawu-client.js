@@ -34,7 +34,7 @@ if(PlugAuth === undefined) var PlugAuth = {};
     
     args.url = client.url + args.url;
     
-    var tx = new PlugAuth.Tx();
+    var tx = new PlugAuth.Client.Tx();
     
     $.ajax(args)
      .success(function(aData, textStatus, jqXHR)        
@@ -182,20 +182,35 @@ if(PlugAuth === undefined) var PlugAuth = {};
     });
   }
   
-  /* TODO
+  PlugAuth.Client.prototype.delete_group = function(aGroupname)
+  {
+    return request(this, {
+      url:  '/group/' + aGroupname,
+      type: 'DELETE',
+    });
+  }
   
-     create_group => POST /group { group => 'group', users => 'one,two' }
-     delete_group => DELETE /group/:group
-     
+  /* TODO
+
      grant => POST /grant/:user/:action/:resource
      revoke => DELETE /grant/:user/:action/:resource
      granted => GET /grant
-     
+
      actions => GET /actions
      host_tag => GET /host/:host/:tag
-     
+
      resources => GET /authz/resources/:user/:action/:regex
-     
+
    */
+
+  /* TODO make *_cb arrays so we can have multiple callbacks */
+  PlugAuth.Client.Tx = function()
+  {
+    this.success_cb = function() {};
+    this.error_cb   = function() {};
+  }
+
+  PlugAuth.Client.Tx.prototype.success = function(aFunction) { this.success_cb = aFunction; return this }
+  PlugAuth.Client.Tx.prototype.error   = function(aFunction) { this.error_cb   = aFunction; return this }
 
 })();

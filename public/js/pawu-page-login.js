@@ -35,7 +35,7 @@ if(PlugAuth.UI === undefined) PlugAuth.UI = {};
   
   page.success = function(client)
   {
-    $('#plugauth_webui_container').html('<p>you are logged in!</p>');
+    $('#plugauth_webui_container').html('<p>Welcome to PlugAuth WebUI</p>');
     
     var pages = PlugAuth.UI.pages.sort(function(a,b) { return a.order - b.order });
     
