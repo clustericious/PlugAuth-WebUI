@@ -190,15 +190,41 @@ if(PlugAuth === undefined) var PlugAuth = {};
     });
   }
   
+  PlugAuth.Client.prototype.granted = function()
+  {
+    return request(this, {
+      url:  '/grant',
+      type: 'GET',
+    });
+  }
+  
+  PlugAuth.Client.prototype.revoke = function(aUsername, aAction, aResource)
+  {
+    return request(this, {
+      url: '/grant/' + aUsername + '/' + aAction + '/' + aResource,
+      type: 'DELETE',
+    });
+  }
+  
+  PlugAuth.Client.prototype.actions = function()
+  {
+    return request(this, {
+      url:  '/actions',
+      type: 'GET',
+    });
+  }
+  
+  PlugAuth.Client.prototype.grant = function(aUsername, aAction, aResource)
+  {
+    return request(this, {
+      url:  '/grant/' + aUsername + '/' + aAction + '/' + aResource,
+      type: 'POST',
+    });
+  }
+  
   /* TODO
 
-     grant => POST /grant/:user/:action/:resource
-     revoke => DELETE /grant/:user/:action/:resource
-     granted => GET /grant
-
-     actions => GET /actions
      host_tag => GET /host/:host/:tag
-
      resources => GET /authz/resources/:user/:action/:regex
 
    */
