@@ -171,8 +171,17 @@ if(PlugAuth === undefined) var PlugAuth = {};
       url: '/group/' + aGroupname + '/' + aUser,
       type: 'DELETE',
     });
-  }  
-
+  }
+  
+  PlugAuth.Client.prototype.create_group = function(aGroupname, aUserlist)
+  {
+    return request(this, {
+      url:  '/group',
+      type: 'POST',
+      data: { group: aGroupname, users: aUserlist.join(',') },
+    });
+  }
+  
   /* TODO
   
      create_group => POST /group { group => 'group', users => 'one,two' }

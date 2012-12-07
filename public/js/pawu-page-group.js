@@ -1,10 +1,28 @@
 /*
- * FIXME: create_group
+ * FIXME: delete_group
  * FIXME: label for in/out lists
  */
 
 $(document).ready(function ()
 {
+  var create_group_modal = new PlugAuth.UI.Modal('New Group');
+  create_group_modal.html('<form id="plugauth_webui_create_group_form">'
+  +                       '<input name="group" type="text" placeholder="group name" />'
+  +                       '<br/>'
+  +                       '<select multiple="multiple" size="15" class="span2" id=""></select>'
+  +                       '</form>'
+  +                       '<p id="plugauth_webui_create_group_message"></p>');
+  create_group_modal.create_button = create_group_modal.add_button('Create', 'btn-primary');
+  create_group_modal.create_button.click(function() { page.create_group() });
+  create_group_modal.groupname = $('#plugauth_webui_create_group_form input');
+  create_group_modal.select = $('#plugauth_webui_create_group_form select');
+  create_group_modal.form = $('#plugauth_webui_create_group_form');
+  create_group_modal.message = $('#plugauth_webui_create_group_message');
+  
+  create_group_modal.on('shown', function() {
+    create_group_modal.groupname.focus();
+  });
+
   var page = new PlugAuth.UI.Page('groups', 'accounts', 'group');
   
   var get_user_lists = function(group, cb)
@@ -180,10 +198,42 @@ $(document).ready(function ()
           });
         };
         tl.create = function() {
-          alert('create!');
+          page.client.user_list()
+            .error(function() {
+              PlugAuth.UI.error_modal.html('<p>Unable to retreieve user list</p>');
+              PlugAuth.UI.error_modal.show();
+            })
+            .success(function(data) {
+              create_group_modal.form.show();
+              create_group_modal.message.hide();
+              create_group_modal.groupname.val('');
+              create_group_modal.select.html($.map(data, function(value){ return '<option>' + value + '</option>' }));
+              create_group_modal.show();
+            });
         };
+        
+        page.create_group = function()
+        {
+          create_group_modal.form.hide();
+          create_group_modal.message.html('<p>please wait</p>');
+          create_group_modal.message.show();
+          var group = create_group_modal.groupname.val();
+          var users = $('#plugauth_webui_create_group_form select option:selected').map(function() { return this.text }).get();
+          page.client.create_group(group, users)
+            .error(function() {
+              create_group_modal.hide();
+              PlugAuth.UI.error_modal.html('<p>Unable to create group</p>');
+              PlugAuth.UI.error_modal.show();
+            })
+            .success(function() {
+              create_group_modal.hide();
+                tl.prepend(group);
+                tl.select(group);
+            });
+        }
         
       });
   }
+  
   page.order = 20;
 });
