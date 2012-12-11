@@ -1,6 +1,7 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+  - minify JavaScript to reduce downloads
   - upgrade bootstrap to v2.2.2
   - don't send credentials when they are not required.
 
