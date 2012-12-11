@@ -20,7 +20,7 @@ my %module_build_args = (
     "Graham Ollis <gollis\@sesda2.com>"
   ],
   "dist_name" => "PlugAuth-WebUI",
-  "dist_version" => "0.01",
+  "dist_version" => "0.02",
   "license" => "perl",
   "module_name" => "PlugAuth::WebUI",
   "recommends" => {},

@@ -8,7 +8,7 @@ use Path::Class::File;
 use File::ShareDir qw( dist_dir );
 
 # ABSTRACT: JavaScript WebUI for PlugAuth
-our $VERSION = '0.01'; # VERSION
+our $VERSION = '0.02'; # VERSION
 
 
 sub share_dir
@@ -54,9 +54,16 @@ sub get_data
     description         => 'PlugAuth server Web user interface',
     plugauth_webui_data => {},
   };
-  foreach my $js (grep { $_->basename =~ /^pawu-.*\.js$/} __PACKAGE__->share_dir->subdir('js')->children( no_hidden => 1))
+  if(-r __PACKAGE__->share_dir->file('js', 'pawu.min.js'))
   {
-    push @{ $data->{js} }, $js->basename;
+    push @{ $data->{js} }, 'pawu.min.js';
+  }
+  else
+  {
+    foreach my $js (grep { $_->basename =~ /^pawu-.*\.js$/} __PACKAGE__->share_dir->subdir('js')->children( no_hidden => 1))
+    {
+      push @{ $data->{js} }, $js->basename;
+    }
   }
   $data;
 }
@@ -73,7 +80,11 @@ PlugAuth::WebUI - JavaScript WebUI for PlugAuth
 
 =head1 VERSION
 
-version 0.01
+version 0.02
+
+=head1 NAME
+
+PlugAuth::WebUI - JavaScript WebUI for PlugAuth
 
 =head1 FUNCTIONS
 

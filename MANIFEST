@@ -31,6 +31,7 @@ public/js/pawu-page-resources.js
 public/js/pawu-page-user.js
 public/js/pawu-page.js
 public/js/pawu-tablist.js
+public/js/pawu.min.js
 public/tmpl/plugauth_webui.html.ep
 t/use.t
 weaver.ini

@@ -4,7 +4,7 @@ if(PlugAuth === undefined) var PlugAuth = {};
 {
   PlugAuth.Client = function(aUrl)
   {
-    this.url = aUrl.replace(/\/$/, '');;
+    this.url = aUrl.replace(/\/$/, '');
   }
   
   PlugAuth.Client.prototype.login = function(aUsername, aPassword)
@@ -19,6 +19,15 @@ if(PlugAuth === undefined) var PlugAuth = {};
     delete this.user;
     delete this.pass;
     return this;
+  }
+
+  PlugAuth.Client.create_fake_method = function(fake_data, fake_status)
+  {
+    return function() {
+      var tx = new PlugAuth.Client.Tx();
+      setTimeout(function(){ tx.success(fake_data, fake_status) },1);
+      return tx;
+    };
   }
   
   var request = function(client, args)
@@ -61,6 +70,14 @@ if(PlugAuth === undefined) var PlugAuth = {};
     return request(this, {
       url:    '/version',
       type:   'GET',
+    });
+  }
+  
+  PlugAuth.Client.prototype.status = function()
+  {
+    return request(this, {
+      url:  '/status',
+      type: 'GET',
     });
   }
   
