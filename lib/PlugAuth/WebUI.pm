@@ -10,6 +10,10 @@ use File::ShareDir qw( dist_dir );
 # ABSTRACT: JavaScript WebUI for PlugAuth
 # VERSION
 
+=head1 NAME
+
+PlugAuth::WebUI - JavaScript WebUI for PlugAuth
+
 =head1 FUNCTIONS
 
 =head2 PlugAuth::WebUI->share_dir
