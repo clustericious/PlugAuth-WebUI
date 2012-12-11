@@ -4,7 +4,7 @@ if(PlugAuth === undefined) var PlugAuth = {};
 {
   PlugAuth.Client = function(aUrl)
   {
-    this.url = aUrl.replace(/\/$/, '');;
+    this.url = aUrl.replace(/\/$/, '');
   }
   
   PlugAuth.Client.prototype.login = function(aUsername, aPassword)

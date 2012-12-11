@@ -35,14 +35,7 @@ if(PlugAuth.UI === undefined) PlugAuth.UI = {};
   
   page.success = function(client)
   {
-    $('#plugauth_webui_container').html('<p>Welcome to PlugAuth WebUI</p>');
-    
-    var pages = PlugAuth.UI.pages.sort(function(a,b) { return a.order - b.order });
-    
-    $.each(pages, function(index, page) {
-      page.enable(client);
-    });
-    
+    PlugAuth.UI.setup(client);
     var menu = new PlugAuth.UI.Menu.MenuItem('logout');
     menu.click(page.enable);
     menu.show();
