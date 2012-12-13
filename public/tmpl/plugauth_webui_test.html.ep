@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title><%= $test %> : PlugAuth WebUI Test</title>
+    <link rel="stylesheet" href="<%= url_for 'plugauth_webui_static', type => 'css', file => 'qunit-1.10.0.css' %>">
+  </head>
+  <body>
+    <div id="qunit"></div>
+    
+    <input type="hidden" id="plugauth_webui_data" name="plugauth_webui_data" value="<%= Mojo::JSON->new->encode($plugauth_webui_data) %>" />
+    
+    <script src="<%= url_for 'plugauth_webui_static', type => 'js', file => 'qunit-1.10.0.js' %>"></script>
+    
+    <script src="<%= url_for 'plugauth_webui_static', type => 'js', file => 'jquery-1.8.3.min.js' %>"></script>
+    <script src="<%= url_for 'plugauth_webui_static', type => 'js', file => 'bootstrap.min.js' %>"></script>
+    <script src="<%= url_for 'plugauth_webui_static', type => 'js', file => 'jquery.base64.min.js' %>"></script>
+% foreach my $js (@$js) {
+    <script src="<%= url_for 'plugauth_webui_static', type => 'js', file => $js %>"></script>
+% }
+    <script>$(document).ready(function () { $('.hide').hide() });</script>
+
+    <script src="<%= url_for 'plugauth_webui_test', test => $test, format => 'js' %>"></script>
+  </body>
+</html>

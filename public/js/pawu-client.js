@@ -25,7 +25,7 @@ if(PlugAuth === undefined) var PlugAuth = {};
   {
     return function() {
       var tx = new PlugAuth.Client.Tx();
-      setTimeout(function(){ tx.success(fake_data, fake_status) },1);
+      setTimeout(function(){ tx.success_cb(fake_data, fake_status) },1);
       return tx;
     };
   }
