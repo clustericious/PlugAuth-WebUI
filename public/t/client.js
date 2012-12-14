@@ -9,23 +9,29 @@ var success_response_handler = function(is_success, data, status)
 }
 
 module( "auth", {
-  setup: function() { client = new PlugAuth.Client(PlugAuth.UI.data.api_url) },
+  setup: function() { 
+    client = new PlugAuth.Client(PlugAuth.UI.data.api_url);
+  },
 });
 
 asyncTest( "primus:spark", function() {
   expect(3);
   
-  client.login('primus', 'spark').auth()
-    .success(function(data, status) { success_response_handler(true, data, status)  })
-    .error  (function(data, status) { success_response_handler(false, data, status) });
+  client.test_basic().success(function() {
+    client.login('primus', 'spark').auth()
+      .success(function(data, status) { success_response_handler(true, data, status)  })
+      .error  (function(data, status) { success_response_handler(false, data, status) });
+    });
 });
 
 asyncTest( "optimus:matrix", function() {
   expect(3);
   
-  client.login('optimus', 'matrix').auth()
-    .success(function(data, status) { success_response_handler(true, data, status)  })
-    .error  (function(data, status) { success_response_handler(false, data, status) });
+  client.test_basic().success(function() {
+    client.login('optimus', 'matrix').auth()
+      .success(function(data, status) { success_response_handler(true, data, status)  })
+      .error  (function(data, status) { success_response_handler(false, data, status) });
+    });
 });
 
 asyncTest( "bogus:bogus", function() {
@@ -39,7 +45,9 @@ asyncTest( "bogus:bogus", function() {
     start();
   }
   
-  client.login('bogus', 'bogus').auth()
-    .success(function(data, status) { error_response_handler(false, data, status)  })
-    .error  (function(data, status) { error_response_handler(true, data, status) });
+  client.test_basic().success(function() {
+    client.login('bogus', 'bogus').auth()
+      .success(function(data, status) { error_response_handler(false, data, status)  })
+      .error  (function(data, status) { error_response_handler(true, data, status) });
+    });
 });

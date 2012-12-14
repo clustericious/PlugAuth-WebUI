@@ -245,6 +245,14 @@ if(PlugAuth === undefined) var PlugAuth = {};
      resources => GET /authz/resources/:user/:action/:regex
 
    */
+   
+  PlugAuth.Client.prototype.test_basic = function()
+  {
+    return request(this, {
+      url:  '/test/setup/basic',
+      type: 'POST',
+    });
+  }
 
   /* TODO make *_cb arrays so we can have multiple callbacks */
   PlugAuth.Client.Tx = function()
