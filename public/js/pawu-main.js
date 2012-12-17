@@ -1,15 +1,6 @@
 if(PlugAuth === undefined) var PlugAuth = {};
 if(PlugAuth.UI === undefined) PlugAuth.UI = {};
 
-(function(){
-
-  var VERSION = 'dev';
-  //VERSION
-  PlugAuth.UI.NAME = 'PlugAuth WebUI';
-  PlugAuth.UI.VERSION = VERSION;
-
-})();
-
 PlugAuth.UI.bind_enter = function(input, callback) { 
   input.keypress(function(event){
     if(event.which == 10 || event.which == 13)
