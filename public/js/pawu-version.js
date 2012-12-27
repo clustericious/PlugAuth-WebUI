@@ -1,5 +1,5 @@
 if(PlugAuth === undefined) var PlugAuth = {};
-if(PlugAuth === undefined) PlugAuth.UI = {};
+if(PlugAuth.UI === undefined) PlugAuth.UI = {};
 
-PlugAuth.UI.Name = 'PlugAuth WebUI';
+PlugAuth.UI.NAME = 'PlugAuth WebUI';
 PlugAuth.UI.VERSION = 'dev';
