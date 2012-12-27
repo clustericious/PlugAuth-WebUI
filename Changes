@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+  - fix bugs on about page
+  - always request json formatted replies
 
 0.02      2012-12-11 14:01:45 America/New_York
   - minify JavaScript to reduce downloads

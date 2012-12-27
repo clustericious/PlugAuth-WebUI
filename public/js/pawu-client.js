@@ -41,7 +41,7 @@ if(PlugAuth === undefined) var PlugAuth = {};
       }
     }
     
-    args.url = client.url + args.url;
+    args.url = client.url + args.url + '.json';
     
     var tx = new PlugAuth.Client.Tx();
     
