@@ -8,7 +8,7 @@ use Path::Class::File;
 use File::ShareDir qw( dist_dir );
 
 # ABSTRACT: JavaScript WebUI for PlugAuth
-our $VERSION = '0.02'; # VERSION
+our $VERSION = '0.03'; # VERSION
 
 
 sub share_dir
@@ -60,7 +60,7 @@ sub get_data
   }
   else
   {
-    foreach my $js (grep { $_->basename =~ /^pawu-.*\.js$/} __PACKAGE__->share_dir->subdir('js')->children( no_hidden => 1))
+    foreach my $js (sort grep { $_->basename =~ /^pawu-.*\.js$/} __PACKAGE__->share_dir->subdir('js')->children( no_hidden => 1))
     {
       push @{ $data->{js} }, $js->basename;
     }
@@ -80,7 +80,7 @@ PlugAuth::WebUI - JavaScript WebUI for PlugAuth
 
 =head1 VERSION
 
-version 0.02
+version 0.03
 
 =head1 NAME
 

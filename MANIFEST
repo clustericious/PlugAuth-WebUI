@@ -10,6 +10,8 @@ dist.ini
 lib/PlugAuth/WebUI.pm
 public/css/bootstrap.css
 public/css/bootstrap.min.css
+public/css/error.txt
+public/css/qunit-1.10.0.css
 public/ico/favicon.ico
 public/img/glyphicons-halflings-white.png
 public/img/glyphicons-halflings.png
@@ -31,7 +33,13 @@ public/js/pawu-page-resources.js
 public/js/pawu-page-user.js
 public/js/pawu-page.js
 public/js/pawu-tablist.js
+public/js/pawu-version.js
 public/js/pawu.min.js
+public/js/qunit-1.10.0.js
+public/t/client.js
+public/t/simple.js
 public/tmpl/plugauth_webui.html.ep
+public/tmpl/plugauth_webui_test.html.ep
+public/tmpl/plugauth_webui_test_list.html.ep
 t/use.t
 weaver.ini

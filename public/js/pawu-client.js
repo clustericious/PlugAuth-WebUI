@@ -25,7 +25,7 @@ if(PlugAuth === undefined) var PlugAuth = {};
   {
     return function() {
       var tx = new PlugAuth.Client.Tx();
-      setTimeout(function(){ tx.success(fake_data, fake_status) },1);
+      setTimeout(function(){ tx.success_cb(fake_data, fake_status) },1);
       return tx;
     };
   }
@@ -41,7 +41,7 @@ if(PlugAuth === undefined) var PlugAuth = {};
       }
     }
     
-    args.url = client.url + args.url;
+    args.url = client.url + args.url + '.json';
     
     var tx = new PlugAuth.Client.Tx();
     
@@ -245,6 +245,14 @@ if(PlugAuth === undefined) var PlugAuth = {};
      resources => GET /authz/resources/:user/:action/:regex
 
    */
+   
+  PlugAuth.Client.prototype.test_basic = function()
+  {
+    return request(this, {
+      url:  '/test/setup/basic',
+      type: 'POST',
+    });
+  }
 
   /* TODO make *_cb arrays so we can have multiple callbacks */
   PlugAuth.Client.Tx = function()

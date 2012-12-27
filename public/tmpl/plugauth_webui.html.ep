@@ -65,6 +65,7 @@
 % foreach my $js (@$js) {
     <script src="<%= url_for 'plugauth_webui_static', type => 'js', file => $js %>"></script>
 % }
+    <script>$(document).ready(function(){ PlugAuth.UI.main() })</script>
     
   </body>
 </html>

@@ -1,15 +1,6 @@
 if(PlugAuth === undefined) var PlugAuth = {};
 if(PlugAuth.UI === undefined) PlugAuth.UI = {};
 
-(function(){
-
-  var VERSION = 'dev';
-  VERSION = '0.02'; //VERSION
-  PlugAuth.UI.NAME = 'PlugAuth WebUI';
-  PlugAuth.UI.VERSION = VERSION;
-
-})();
-
 PlugAuth.UI.bind_enter = function(input, callback) { 
   input.keypress(function(event){
     if(event.which == 10 || event.which == 13)
@@ -31,7 +22,7 @@ PlugAuth.UI.setup = function(client)
   $('#plugauth_webui_welcome').append('<p>Client is <strong>' + PlugAuth.UI.NAME + '</strong> version <strong>' + PlugAuth.UI.VERSION + '</strong></p>');
   
   var pages = PlugAuth.UI.pages.sort(function(a,b) { return a.order - b.order });
-
+  
   $.each(pages, function(index, page) {
     page.enable(client);
   });
@@ -46,12 +37,15 @@ PlugAuth.UI.setup = function(client)
     });
 }
 
-
-$(document).ready(function(){
+$(document).ready(function() {
 
   PlugAuth.UI.error_modal = new PlugAuth.UI.Modal('Error');
   PlugAuth.UI.notice_modal = new PlugAuth.UI.Modal('Notice');
   PlugAuth.UI.data = JSON.parse($('#plugauth_webui_data').val());
+
+});
+
+PlugAuth.UI.main = function() {
 
   if(PlugAuth.UI.data.requires_authentic_credentials == 1)
   {
@@ -64,4 +58,4 @@ $(document).ready(function(){
     PlugAuth.UI.setup(client);
   }
 
-});
+};

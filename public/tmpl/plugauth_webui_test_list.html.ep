@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>PlugAuth WebUI Test</title>
+  </head>
+  <body>
+    <ul>
+% foreach my $test (@$list) {
+      <li><a href="<%= url_for 'plugauth_webui_test', test => $test %>"><%= $test %></a></li>
+% }
+    </ul>
+  </body>
+</html>
