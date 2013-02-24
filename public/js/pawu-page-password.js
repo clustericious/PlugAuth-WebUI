@@ -56,6 +56,8 @@ $(document).ready(function ()
   
   page.can = function()
   {
+    if(typeof page.client.user === "undefined")
+      return false;
     return page.client.can('change_password', 'user/' + page.client.user)
   }
 
