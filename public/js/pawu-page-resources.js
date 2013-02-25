@@ -103,7 +103,7 @@ $(document).ready(function ()
   page.select = function()
   {
     $('#plugauth_webui_toolbar').html('<form class="navbar-form pull-left">'
-    +                                 '<input type="text" class="span2" placeholder="Search" id="plugauth_webui_resource_search">'
+    +                                 '<input type="text" placeholder="Search" id="plugauth_webui_resource_search">'
     +                                 '</form><form class="navbar-form pull-left">'
     +                                 '<button class="btn" id="plugauth_webui_resource_grant_button">Grant</button>'
     +                                 '</form>');
