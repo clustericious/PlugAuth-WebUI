@@ -10,10 +10,6 @@ use File::ShareDir qw( dist_dir );
 # ABSTRACT: JavaScript WebUI for PlugAuth
 # VERSION
 
-=head1 NAME
-
-PlugAuth::WebUI - JavaScript WebUI for PlugAuth
-
 =head1 FUNCTIONS
 
 =head2 PlugAuth::WebUI->share_dir
@@ -90,12 +86,10 @@ sub get_data
 
 1;
 
-=head1 COPYRIGHT AND LICENSE
+=head1 BUNDLED FILES
 
-This software is copyright (c) 2012 by NASA GSFC.
-
-This is free software; you can redistribute it and/or modify it under
-the same terms as the Perl 5 programming language system itself.
+This distribution includes a few files with different licenses that have been bundled for the
+implementation of the PlugAuth WebUI.
 
 =head2 jQuery
 
