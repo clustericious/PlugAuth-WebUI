@@ -47,7 +47,12 @@ $(document).ready(function() {
 
 PlugAuth.UI.main = function() {
 
-  if(PlugAuth.UI.data.requires_authentic_credentials == 1)
+  if(PlugAuth.UI.data.skip_login == 1)
+  {
+    var client = new PlugAuth.Client(PlugAuth.UI.data.api_url, PlugAuth.UI.data.user);
+    PlugAuth.UI.setup(client);
+  }
+  else if(PlugAuth.UI.data.requires_authentic_credentials == 1)
   {
     PlugAuth.UI.login.enable();
   }

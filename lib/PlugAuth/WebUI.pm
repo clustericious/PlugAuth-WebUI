@@ -68,7 +68,7 @@ sub get_data
     js                  => [ 'jquery.base64.min.js' ],
     title               => 'PlugAuth WebUI',
     description         => 'PlugAuth server Web user interface',
-    plugauth_webui_data => {},
+    plugauth_webui_data => { skip_login => 0 },
   };
   if(-r __PACKAGE__->share_dir->file('js', 'pawu.min.js'))
   {
