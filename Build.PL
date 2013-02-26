@@ -20,7 +20,7 @@ my %module_build_args = (
     "Graham Ollis <gollis\@sesda2.com>"
   ],
   "dist_name" => "PlugAuth-WebUI",
-  "dist_version" => "0.03",
+  "dist_version" => "0.04",
   "license" => "perl",
   "module_name" => "PlugAuth::WebUI",
   "recommends" => {},
@@ -29,9 +29,7 @@ my %module_build_args = (
     "File::ShareDir" => 0,
     "Path::Class::Dir" => 0,
     "Path::Class::File" => 0,
-    "perl" => "v5.10.0",
-    "strict" => 0,
-    "warnings" => 0
+    "perl" => "v5.10.0"
   },
   "script_files" => [],
   "share_dir" => {

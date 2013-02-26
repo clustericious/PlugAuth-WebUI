@@ -38,7 +38,7 @@ if(PlugAuth.UI === undefined) PlugAuth.UI = {};
     });
     
     $('#plugauth_webui_toolbar').html('<form class="navbar-form pull-left">'
-    +                                   '<input type="text" class="span2" placeholder="Search" id="plugauth_webui_tab_search">'
+    +                                   '<input type="text" placeholder="Search" id="plugauth_webui_tab_search">'
     +                                   '</form><form class="navbar-form pull-left">'
     +                                   '<button class="btn" id="plugauth_webui_tab_create">' + opts.new_label + '</button>'
     +                                   '</form>');

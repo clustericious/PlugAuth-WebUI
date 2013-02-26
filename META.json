@@ -4,7 +4,7 @@
       "Graham Ollis <gollis@sesda2.com>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Zilla version 4.300028, CPAN::Meta::Converter version 2.120921",
+   "generated_by" : "Dist::Zilla version 4.300029, CPAN::Meta::Converter version 2.120921",
    "license" : [
       "perl_5"
    ],
@@ -31,9 +31,7 @@
             "File::ShareDir" : "0",
             "Path::Class::Dir" : "0",
             "Path::Class::File" : "0",
-            "perl" : "v5.10.0",
-            "strict" : "0",
-            "warnings" : "0"
+            "perl" : "v5.10.0"
          }
       },
       "test" : {
@@ -43,6 +41,6 @@
       }
    },
    "release_status" : "stable",
-   "version" : "0.03"
+   "version" : "0.04"
 }
 

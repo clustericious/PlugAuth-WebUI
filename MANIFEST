@@ -42,4 +42,3 @@ public/tmpl/plugauth_webui.html.ep
 public/tmpl/plugauth_webui_test.html.ep
 public/tmpl/plugauth_webui_test_list.html.ep
 t/use.t
-weaver.ini

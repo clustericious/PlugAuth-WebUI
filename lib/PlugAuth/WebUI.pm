@@ -8,8 +8,11 @@ use Path::Class::File;
 use File::ShareDir qw( dist_dir );
 
 # ABSTRACT: JavaScript WebUI for PlugAuth
-our $VERSION = '0.03'; # VERSION
+our $VERSION = '0.04'; # VERSION
 
+
+# FIXME: add a way to force non minified version of the js
+#        and expose this in the PlugAuth::Plugin::WebUI config
 
 sub share_dir
 {
@@ -49,7 +52,7 @@ sub share_dir
 sub get_data
 {
   my $data = {
-    js                  => [],
+    js                  => [ 'jquery.base64.min.js' ],
     title               => 'PlugAuth WebUI',
     description         => 'PlugAuth server Web user interface',
     plugauth_webui_data => {},
@@ -70,8 +73,8 @@ sub get_data
 
 1;
 
-
 __END__
+
 =pod
 
 =head1 NAME
@@ -80,11 +83,7 @@ PlugAuth::WebUI - JavaScript WebUI for PlugAuth
 
 =head1 VERSION
 
-version 0.03
-
-=head1 NAME
-
-PlugAuth::WebUI - JavaScript WebUI for PlugAuth
+version 0.04
 
 =head1 FUNCTIONS
 
@@ -97,12 +96,10 @@ directory that contains the web UI for PlugAuth.
 
 Returns the stash data needed to generate the html from the ep template.
 
-=head1 COPYRIGHT AND LICENSE
+=head1 BUNDLED FILES
 
-This software is copyright (c) 2012 by NASA GSFC.
-
-This is free software; you can redistribute it and/or modify it under
-the same terms as the Perl 5 programming language system itself.
+This distribution includes a few files with different licenses that have been bundled for the
+implementation of the PlugAuth WebUI.
 
 =head2 jQuery
 
@@ -128,5 +125,11 @@ Licensed under the Apache 2.0 License
 
 Graham Ollis <gollis@sesda2.com>
 
-=cut
+=head1 COPYRIGHT AND LICENSE
 
+This software is copyright (c) 2012 by NASA GSFC.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut

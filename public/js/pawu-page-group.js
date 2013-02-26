@@ -116,6 +116,7 @@ $(document).ready(function ()
             
             $('#' + id + '_remove_group_button').click(function() {
               page.remove_group(group);
+              return false;
             });
             
             var remove_single_user = function()

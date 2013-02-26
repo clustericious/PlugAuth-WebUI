@@ -3,7 +3,7 @@ $(document).ready(function ()
   var page = new PlugAuth.UI.Page('password');
   page.select = function()
   {
-    $('#plugauth_webui_container').html('<h3>' + page.client.user + '<h3>'
+    $('#plugauth_webui_container').html('<h3>change password<h3>'
     +                                   '<form id="plugauth_webui_change_password_form">'
     +                                   '<input class="span3" type="password" placeholder="password" id="plugauth_webui_change_password_password" /><br/>'
     +                                   '<input class="span3" type="password" placeholder="confirm"  id="plugauth_webui_change_password_confirm"/><br/>'
@@ -56,6 +56,8 @@ $(document).ready(function ()
   
   page.can = function()
   {
+    if(typeof page.client.user === "undefined")
+      return { success: function() { }, failure: function(f) { f() } };
     return page.client.can('change_password', 'user/' + page.client.user)
   }
 

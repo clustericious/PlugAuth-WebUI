@@ -62,6 +62,7 @@ $(document).ready(function ()
           {
             $('#plugauth_webui_remove_user_button_' + index).click(function() {
               page.remove_user(user);
+              return false;
             });
             client.can('change_password', 'user/' + user)
               .success(function() {

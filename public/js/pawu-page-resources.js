@@ -27,9 +27,10 @@ $(document).ready(function ()
     (function() {
       var modal = new PlugAuth.UI.Modal('Grant');
       modal.html('<form>'
-      +          '<input type="text" class="span3" placeholder="resource"   id="plugauth_webui_grant_resource" /><br />'
+      +          '<input type="text" class="span3" placeholder="resource"   id="plugauth_webui_grant_resource" data-provide="typeahead" /><br />'
       +          '<input type="text" class="span3" placeholder="action"     id="plugauth_webui_grant_action"   data-provide="typeahead" /><br />'
-      +          '<input type="text" class="span3" placeholder="user/group" id="plugauth_webui_grant_group"    /><br />'
+      +          '<input type="text" class="span3" placeholder="user/group" id="plugauth_webui_grant_group"    data-provide="typeahead" /><br />'
+      +          '<br /><br />'
       +          '</form>');
   
       var resource = $('#plugauth_webui_grant_resource');
@@ -40,13 +41,30 @@ $(document).ready(function ()
         resource.val('');
         action.val('');
         page.client.actions()
-          // TODO: this works for tab completion, but what I really wanted
-          // to see was a drop down for the suggestions.  Seems to work in
-          // other examples I have seen, but something amiss here.
           .success(function(data) {
             action.typeahead({ source: data.sort() });
           });
         group.val('');
+        
+        page.client.granted()
+          .success(function(data) {
+            resource.typeahead({ source: $.map(data, function(line) { return line.replace(/\s*\(.*$/, '') }).sort() });
+          });
+        
+        var group_list = [];
+        var count = 0;
+        page.client.user_list()
+          .success(function(data) {
+            group_list = group_list.concat(data);
+            if(++count == 2)
+              group.typeahead({ source: group_list.sort() });
+          });
+        page.client.group_list()
+          .success(function(data) {
+            group_list = group_list.concat(data);
+            if(++count == 2)
+              group.typeahead({ source: group_list.sort() });
+          });
       });
 
       modal.on('shown', function() {
@@ -85,7 +103,7 @@ $(document).ready(function ()
   page.select = function()
   {
     $('#plugauth_webui_toolbar').html('<form class="navbar-form pull-left">'
-    +                                 '<input type="text" class="span2" placeholder="Search" id="plugauth_webui_resource_search">'
+    +                                 '<input type="text" placeholder="Search" id="plugauth_webui_resource_search">'
     +                                 '</form><form class="navbar-form pull-left">'
     +                                 '<button class="btn" id="plugauth_webui_resource_grant_button">Grant</button>'
     +                                 '</form>');

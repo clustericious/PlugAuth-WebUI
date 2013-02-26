@@ -29,11 +29,9 @@ my %WriteMakefileArgs = (
   "PREREQ_PM" => {
     "File::ShareDir" => 0,
     "Path::Class::Dir" => 0,
-    "Path::Class::File" => 0,
-    "strict" => 0,
-    "warnings" => 0
+    "Path::Class::File" => 0
   },
-  "VERSION" => "0.03",
+  "VERSION" => "0.04",
   "test" => {
     "TESTS" => "t/*.t"
   }
