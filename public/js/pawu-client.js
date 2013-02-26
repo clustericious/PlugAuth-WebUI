@@ -2,9 +2,11 @@ if(PlugAuth === undefined) var PlugAuth = {};
 
 (function ()
 {
-  PlugAuth.Client = function(aUrl)
+  PlugAuth.Client = function(aUrl, aUsername)
   {
     this.url = aUrl.replace(/\/$/, '');
+    if(!(typeof(aUsername)==='undefined'))
+      this.user = aUsername;
   }
   
   PlugAuth.Client.prototype.login = function(aUsername, aPassword)
@@ -33,7 +35,7 @@ if(PlugAuth === undefined) var PlugAuth = {};
   var request = function(client, args)
   {
     args = jQuery.extend({}, args);
-    if(! (client.user === undefined) )   
+    if(!(client.user === undefined) && !(client.pass === undefined))
     {
       var hash = $.base64.encode(client.user + ':' + client.pass);
       args.beforeSend = function(req) {

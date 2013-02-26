@@ -1,7 +1,7 @@
 {
    "abstract" : "JavaScript WebUI for PlugAuth",
    "author" : [
-      "Graham Ollis <gollis@sesda2.com>"
+      "Graham Ollis <graham.a.ollis@nasa.gov>"
    ],
    "dynamic_config" : 0,
    "generated_by" : "Dist::Zilla version 4.300029, CPAN::Meta::Converter version 2.120921",
@@ -28,7 +28,10 @@
       },
       "runtime" : {
          "requires" : {
+            "File::Copy" : "0",
             "File::ShareDir" : "0",
+            "Getopt::Long" : "0",
+            "Path::Class" : "0",
             "Path::Class::Dir" : "0",
             "Path::Class::File" : "0",
             "perl" : "v5.10.0"
@@ -41,6 +44,6 @@
       }
    },
    "release_status" : "stable",
-   "version" : "0.04"
+   "version" : "0.05"
 }
 

@@ -8,7 +8,7 @@ use Path::Class::File;
 use File::ShareDir qw( dist_dir );
 
 # ABSTRACT: JavaScript WebUI for PlugAuth
-our $VERSION = '0.04'; # VERSION
+our $VERSION = '0.05'; # VERSION
 
 
 # FIXME: add a way to force non minified version of the js
@@ -55,7 +55,7 @@ sub get_data
     js                  => [ 'jquery.base64.min.js' ],
     title               => 'PlugAuth WebUI',
     description         => 'PlugAuth server Web user interface',
-    plugauth_webui_data => {},
+    plugauth_webui_data => { skip_login => 0 },
   };
   if(-r __PACKAGE__->share_dir->file('js', 'pawu.min.js'))
   {
@@ -83,7 +83,7 @@ PlugAuth::WebUI - JavaScript WebUI for PlugAuth
 
 =head1 VERSION
 
-version 0.04
+version 0.05
 
 =head1 FUNCTIONS
 
@@ -123,7 +123,7 @@ Licensed under the Apache 2.0 License
 
 =head1 AUTHOR
 
-Graham Ollis <gollis@sesda2.com>
+Graham Ollis <graham.a.ollis@nasa.gov>
 
 =head1 COPYRIGHT AND LICENSE
 

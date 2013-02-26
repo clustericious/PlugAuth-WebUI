@@ -12,7 +12,7 @@ install_share dist => "public";
 
 my %WriteMakefileArgs = (
   "ABSTRACT" => "JavaScript WebUI for PlugAuth",
-  "AUTHOR" => "Graham Ollis <gollis\@sesda2.com>",
+  "AUTHOR" => "Graham Ollis <graham.a.ollis\@nasa.gov>",
   "BUILD_REQUIRES" => {
     "Module::Build" => "0.3601",
     "Test::More" => 0
@@ -23,15 +23,20 @@ my %WriteMakefileArgs = (
     "Module::Build" => "0.3601"
   },
   "DISTNAME" => "PlugAuth-WebUI",
-  "EXE_FILES" => [],
+  "EXE_FILES" => [
+    "bin/plugauth_webui_install"
+  ],
   "LICENSE" => "perl",
   "NAME" => "PlugAuth::WebUI",
   "PREREQ_PM" => {
+    "File::Copy" => 0,
     "File::ShareDir" => 0,
+    "Getopt::Long" => 0,
+    "Path::Class" => 0,
     "Path::Class::Dir" => 0,
     "Path::Class::File" => 0
   },
-  "VERSION" => "0.04",
+  "VERSION" => "0.05",
   "test" => {
     "TESTS" => "t/*.t"
   }

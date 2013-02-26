@@ -1,0 +1,109 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+use v5.10;
+use PlugAuth::WebUI;
+use Getopt::Long qw( GetOptions );
+use File::Copy qw( copy );
+use Path::Class qw( dir file );
+
+# PODNAME: plugauth_webui_install
+# ABSTRACT: Install JavaScript portion of PlugAuth WebUI from command line
+our $VERSION = '0.05'; # VERSION
+
+
+my $force = 0;
+
+GetOptions(
+  'force|f' => \$force,
+);
+
+my $dest = shift @ARGV;
+
+unless(defined $dest)
+{
+  say STDERR "plugauth_webui_install [ -f | --force ] directory";
+  exit 2;
+}
+
+unless(-d $dest)
+{
+  say STDERR "$dest is not a directory";
+  exit 2;
+}
+
+$dest = dir( $dest );
+
+my $ret = 0;
+
+foreach my $js (@{ PlugAuth::WebUI->get_data->{js} })
+{
+  my $old = PlugAuth::WebUI->share_dir->file('js', $js);
+  my $new = $dest->file($js);
+  unless($force)
+  {
+    if(-e $new)
+    {
+      say STDERR "$new exists, skipping (use --force to overwrite)";
+      $ret = 1;
+      next;
+    }
+  }
+  say "$old => $new";
+  copy($old => $new) || do {
+    say STDERR "Copy failed: $!";
+    $ret = 1;
+  };
+}
+
+exit $ret;
+
+__END__
+
+=pod
+
+=head1 NAME
+
+plugauth_webui_install - Install JavaScript portion of PlugAuth WebUI from command line
+
+=head1 VERSION
+
+version 0.05
+
+=head1 SYNOPSIS
+
+ # safe
+ % plugauth_webui_install /path/to/install/into
+
+ # write over existing files if necessary
+ % plugauth_webui_install -f /path/to/install/into
+
+=head1 DESCRIPTION
+
+This program copies the JavaScript portion of the PlugAuth WebUI for
+integration with your website.  The only argument required is the path
+to install into.
+
+=head1 OPTIONS
+
+=head2 --force | -f
+
+Force the install, writing over any existing files if necessary.
+
+=head1 RETURN VALUE
+
+This program returns 0 on success or either 1 or 2 on failure.
+
+=head1 AUTHOR
+
+Graham Ollis <graham.a.ollis@nasa.gov>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2012 by NASA GSFC.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut

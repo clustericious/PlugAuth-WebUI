@@ -6,6 +6,7 @@ META.json
 META.yml
 Makefile.PL
 README
+bin/plugauth_webui_install
 dist.ini
 lib/PlugAuth/WebUI.pm
 public/css/bootstrap.css
