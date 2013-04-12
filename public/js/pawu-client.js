@@ -257,6 +257,14 @@ if(PlugAuth === undefined) var PlugAuth = {};
     });
   }
   
+  PlugAuth.Client.prototype.audit_check = function()
+  {
+    return request(this, {
+      url:  '/audit',
+      type: 'GET',
+    });
+  }
+  
   /* TODO
 
      host_tag => GET /host/:host/:tag

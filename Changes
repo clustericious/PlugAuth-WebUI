@@ -1,6 +1,7 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+  - support for the PlugAuth Audit plugin, if it is available.
 
 0.05      2013-02-26 17:44:49 America/New_York
   - added plugauth_webui_install script

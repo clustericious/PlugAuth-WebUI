@@ -35,6 +35,11 @@ PlugAuth.UI.setup = function(client)
       +                                   'version <strong>' + data.server_version + '</strong> '
       +                                   'on <strong>' + data.server_hostname + '</strong></p>');
     });
+  
+  client.audit_check()
+    .success(function(data) {
+      $('#plugauth_webui_welcome').append('<p>Audit Plugin version <strong>' + data.version + '</string></p>');
+    });
 }
 
 $(document).ready(function() {
