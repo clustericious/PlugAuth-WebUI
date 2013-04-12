@@ -65,7 +65,7 @@ Returns the stash data needed to generate the html from the ep template.
 sub get_data
 {
   my $data = {
-    js                  => [ 'jquery.base64.min.js' ],
+    js                  => [ 'jquery.base64.min.js', 'bootstrap-datepicker.js' ],
     title               => 'PlugAuth WebUI',
     description         => 'PlugAuth server Web user interface',
     plugauth_webui_data => { skip_login => 0 },
@@ -108,6 +108,12 @@ Licensed under the MIT License
 =head2 Twitter Bootstrap
 
 Copyright 2012 Twitter, Inc.
+
+Licensed under the Apache 2.0 License
+
+=head2 Bootstrap Date Picker
+
+Copyright 2012 Stefan Petre
 
 Licensed under the Apache 2.0 License
 
