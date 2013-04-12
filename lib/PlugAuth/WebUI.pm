@@ -113,6 +113,8 @@ Licensed under the Apache 2.0 License
 
 =head2 Bootstrap Date Picker
 
+http://www.eyecon.ro/bootstrap-datepicker/
+
 Copyright 2012 Stefan Petre
 
 Licensed under the Apache 2.0 License
