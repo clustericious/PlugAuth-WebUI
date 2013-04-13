@@ -45,7 +45,7 @@ $(document).ready(function ()
             content: PlugAuth.CSV.stringify([['user']].concat(tl.get_display_list()))
           }));
           
-          $('#plugauth_webui_csv_download').attr('download', 'plugauth_user.csv');
+          $('#plugauth_webui_csv_download').attr('download', 'plugauth_users.csv');
           
           return true;
         
