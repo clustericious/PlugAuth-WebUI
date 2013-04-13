@@ -131,7 +131,7 @@ $(document).ready(function()
         && !key.match(/^(admin|event|user|group)$/))
         {
           args_html.push('<strong>' + key + '</strong>=' + element[key]);
-          args_txt.push (key + element[key]);
+          args_txt.push ([key, element[key]].join('='));
         }
       }
       
