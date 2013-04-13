@@ -18,16 +18,16 @@ $(document).ready(function()
   var page = new PlugAuth.UI.Page('audit', 'accounts', 'audit');
   page.select = function()
   {
-    $('#plugauth_webui_container').html(
-      '<div id="plugauth_webui_audit_control">' +
+    $('#plugauth_webui_toolbar').html(
       '  <a href="#" class="btn small" id="plugauth_webui_audit_download">CSV</a>' +
       '  <a ' +
       '     href="#" ' +
       '     class="btn smal" ' +
       '     id="plugauth_webui_audit_date_button" ' +
       '     data-date-format="yyyy-mm-dd" ' +
-      '     data-date="2012-02-12">Today</a>' +
-      '</div>' +
+      '     data-date="2012-02-12">Today</a>'
+    );
+    $('#plugauth_webui_container').html(
       '<table class="table table-striped">' +
       '  <thead>' +
       '    <tr>' +
