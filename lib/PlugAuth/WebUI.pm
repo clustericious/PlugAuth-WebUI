@@ -119,4 +119,12 @@ Copyright 2012 Stefan Petre
 
 Licensed under the Apache 2.0 License
 
+=head2 cvs-string
+
+https://npmjs.org/package/csv-string
+
+Copyright 2011 Nicolas Thouvenin <nthouvenin@gmail.com>
+
+Licensed under the MIT/X11 license
+
 =cut
