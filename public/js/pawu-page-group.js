@@ -106,9 +106,16 @@ $(document).ready(function ()
             var csv_data = [['group','user']];
             
             tl.get_display_list().forEach(function(group) {
-              user_map[group].forEach(function(user) {
-                csv_data = csv_data.concat([[group,user]]);
-              });
+              if(user_map[group].length == 0)
+              {
+                csv_data = csv_data.concat([[group,'~']]);
+              }
+              else
+              {
+                user_map[group].forEach(function(user) {
+                  csv_data = csv_data.concat([[group,user]]);
+                });
+              }
             });
             
             a.attr('href', PlugAuth.DL.data_to_uri({
