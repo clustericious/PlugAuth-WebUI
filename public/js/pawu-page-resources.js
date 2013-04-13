@@ -106,7 +106,24 @@ $(document).ready(function ()
     +                                 '<input type="text" placeholder="Search" id="plugauth_webui_resource_search">'
     +                                 '</form><form class="navbar-form pull-left">'
     +                                 '<button class="btn" id="plugauth_webui_resource_grant_button">Grant</button>'
+    +                                 '<a href="#" class="btn small" id="plugauth_webui_resource_download" download="plugauth_resources.csv">CSV</a>'
     +                                 '</form>');
+    
+    $('#plugauth_webui_resource_download').click(function()
+    {
+      var csv_data = [];
+      $('#plugauth_webui_granted_table tr').each(function(index, tr) {
+        if($(tr).css('display') != 'none')
+          csv_data.push([$(tr).children().eq(0).html(), $(tr).children().eq(1).html(), $(tr).children().eq(2).html()]);
+      });
+      
+      $('#plugauth_webui_resource_download').attr('href', PlugAuth.DL.data_to_uri({
+          type: 'text/csv',
+          content: PlugAuth.CSV.stringify(csv_data)
+      }));
+      
+      return true;
+    });
     
     // setup search
     (function() {
