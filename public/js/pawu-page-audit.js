@@ -19,13 +19,13 @@ $(document).ready(function()
   page.select = function()
   {
     $('#plugauth_webui_toolbar').html(
-      '  <a href="#" class="btn small" id="plugauth_webui_audit_download">CSV</a>' +
       '  <a ' +
       '     href="#" ' +
       '     class="btn smal" ' +
       '     id="plugauth_webui_audit_date_button" ' +
       '     data-date-format="yyyy-mm-dd" ' +
-      '     data-date="2012-02-12">Today</a>'
+      '     data-date="2012-02-12">Today</a>' +
+      '  <a href="#" class="btn small" id="plugauth_webui_audit_download">CSV</a>'
     );
     $('#plugauth_webui_container').html(
       '<table class="table table-striped">' +
@@ -61,7 +61,7 @@ $(document).ready(function()
       date_to_string(new Date)
     );
     $('#plugauth_webui_audit_download').attr('download',
-      'audit_log_' + date_to_string(new Date) + '.csv'
+      'plugauth_audit_log_' + date_to_string(new Date) + '.csv'
     );
     
     clear();
@@ -122,18 +122,21 @@ $(document).ready(function()
   fetch_audit_good = function(data)
   {
     data.forEach(function(element) {
-      var args_html = '';
-      var args_txt  = '';
+      var args_html = [];
+      var args_txt  = [];
       for(var key in element)
       {
         if(element.hasOwnProperty(key)
         && !key.match(/^time_/)
         && !key.match(/^(admin|event|user|group)$/))
         {
-          args_html += '<strong>' + key + '</strong>=' + element[key] + ', ';
-          args_txt  += key + element[key] + ', ';
+          args_html.push('<strong>' + key + '</strong>=' + element[key]);
+          args_txt.push (key + element[key]);
         }
       }
+      
+      args_html = args_html.join(', ');
+      args_txt  = args_txt.join(', ');
       
       var user = element.user || element.group || '';
     
