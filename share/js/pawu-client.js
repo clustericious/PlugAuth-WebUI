@@ -241,6 +241,30 @@ if(PlugAuth === undefined) var PlugAuth = {};
     });
   }
   
+  PlugAuth.Client.prototype.audit = function(aYear, aMonth, aDay)
+  {
+    return request(this, {
+      url:  '/audit/' + aYear + '/' + aMonth + '/' + aDay,
+      type: 'GET',
+    });
+  }
+  
+  PlugAuth.Client.prototype.audit_today = function()
+  {
+    return request(this, {
+      url:  '/audit/today',
+      type: 'GET',
+    });
+  }
+  
+  PlugAuth.Client.prototype.audit_check = function()
+  {
+    return request(this, {
+      url:  '/audit',
+      type: 'GET',
+    });
+  }
+  
   /* TODO
 
      host_tag => GET /host/:host/:tag

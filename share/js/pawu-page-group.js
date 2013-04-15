@@ -18,11 +18,14 @@ $(document).ready(function ()
     create_group_modal.groupname.focus();
   });
   
-  remove_group_modal = new PlugAuth.UI.Modal('Remove User');
+  var remove_group_modal = new PlugAuth.UI.Modal('Remove User');
   remove_group_modal.html('<p>Please confirm removal of user <span id="plugauth_webui_remove_user_name"></span></p>');
   remove_group_modal.confirm = remove_group_modal.add_button('Remove', 'btn-danger');
   remove_group_modal.confirmed = function() { };
   remove_group_modal.confirm.click(function () { remove_group_modal.confirmed() });
+  
+  var download_modal = new PlugAuth.UI.Modal('Download');
+  download_modal.html('<a href="#" class="btn small" id="plugauth_webui_group_csv_download" download="plugauth_groups.csv">Wait</a>');
 
   var page = new PlugAuth.UI.Page('groups', 'accounts', 'group');
   
@@ -81,6 +84,67 @@ $(document).ready(function ()
       .success(function(data) {
         
         var tl = new PlugAuth.UI.TabList(data, { new_label: 'New Group' });
+        
+        tl.download = function() {
+
+          var a = $('#plugauth_webui_group_csv_download');
+          a.html('Wait');
+          a.addClass('disabled');
+          var waiter = function() { return false; };
+          a.click(waiter);
+          
+          download_modal.show();
+        
+          var count = 0;
+          var user_map = {};
+          var finish = function() {
+            
+            a.html('CSV');
+            a.removeClass('disabled');
+            a.unbind('click', waiter);
+            
+            var csv_data = [['group','user']];
+            
+            tl.get_display_list().forEach(function(group) {
+              if(user_map[group].length == 0)
+              {
+                csv_data = csv_data.concat([[group,'~']]);
+              }
+              else
+              {
+                user_map[group].forEach(function(user) {
+                  csv_data = csv_data.concat([[group,user]]);
+                });
+              }
+            });
+            
+            a.attr('href', PlugAuth.DL.data_to_uri({
+              type: 'text/csv',
+              content: PlugAuth.CSV.stringify(csv_data)
+            }));
+          };
+          
+          tl.get_display_list().forEach(function(group) {
+            count++;
+            page.client.users(group)
+              .success(function(users) {
+                count--;
+                user_map[group] = users;
+                if(count == 0)
+                  finish();
+              })
+              .error(function() {
+                count--;
+                user_map[group] = [ 'ERROR' ];
+                if(count == 0)
+                  finish();
+              });
+          });
+          
+          return false;
+        
+        };
+        
         tl.callback = function(group, pane) {
           get_user_lists(group, function(user_in, user_out) {
             var id = 'plugauth_webui_group_membership_' +  counter++;

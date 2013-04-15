@@ -8,7 +8,7 @@ use Path::Class::File;
 use File::ShareDir qw( dist_dir );
 
 # ABSTRACT: JavaScript WebUI for PlugAuth
-our $VERSION = '0.05'; # VERSION
+our $VERSION = '0.06'; # VERSION
 
 
 # FIXME: add a way to force non minified version of the js
@@ -41,7 +41,7 @@ sub share_dir
         ->dir
         ->parent
         ->parent
-        ->subdir('public');
+        ->subdir('share');
     }
   }
   
@@ -52,7 +52,7 @@ sub share_dir
 sub get_data
 {
   my $data = {
-    js                  => [ 'jquery.base64.min.js' ],
+    js                  => [ ],
     title               => 'PlugAuth WebUI',
     description         => 'PlugAuth server Web user interface',
     plugauth_webui_data => { skip_login => 0 },
@@ -83,7 +83,7 @@ PlugAuth::WebUI - JavaScript WebUI for PlugAuth
 
 =head1 VERSION
 
-version 0.05
+version 0.06
 
 =head1 FUNCTIONS
 
@@ -120,6 +120,22 @@ Licensed under the MIT License
 Copyright 2012 Twitter, Inc.
 
 Licensed under the Apache 2.0 License
+
+=head2 Bootstrap Date Picker
+
+http://www.eyecon.ro/bootstrap-datepicker/
+
+Copyright 2012 Stefan Petre
+
+Licensed under the Apache 2.0 License
+
+=head2 cvs-string
+
+https://npmjs.org/package/csv-string
+
+Copyright 2011 Nicolas Thouvenin <nthouvenin@gmail.com>
+
+Licensed under the MIT/X11 license
 
 =head1 AUTHOR
 

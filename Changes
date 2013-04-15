@@ -1,5 +1,8 @@
 Revision history for PlugAuth-WebUI
 
+0.06      2013-04-15 13:52:44 America/New_York
+  - support for the PlugAuth Audit plugin, if it is available.
+
 0.05      2013-02-26 17:44:49 America/New_York
   - added plugauth_webui_install script
   - skip_login and user options for when BASIC Auth has already been accomplished

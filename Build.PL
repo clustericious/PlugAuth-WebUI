@@ -11,8 +11,6 @@ my %module_build_args = (
     "Test::More" => 0
   },
   "configure_requires" => {
-    "ExtUtils::MakeMaker" => "6.30",
-    "File::ShareDir::Install" => "0.03",
     "Module::Build" => "0.3601"
   },
   "dist_abstract" => "JavaScript WebUI for PlugAuth",
@@ -20,7 +18,7 @@ my %module_build_args = (
     "Graham Ollis <graham.a.ollis\@nasa.gov>"
   ],
   "dist_name" => "PlugAuth-WebUI",
-  "dist_version" => "0.05",
+  "dist_version" => "0.06",
   "license" => "perl",
   "module_name" => "PlugAuth::WebUI",
   "recommends" => {},
@@ -38,7 +36,7 @@ my %module_build_args = (
     "bin/plugauth_webui_install"
   ],
   "share_dir" => {
-    "dist" => "public"
+    "dist" => "share"
   }
 );
 

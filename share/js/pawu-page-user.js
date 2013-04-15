@@ -37,6 +37,20 @@ $(document).ready(function ()
       .success(function(data) {
         
         var tl = new PlugAuth.UI.TabList(data, { new_label: 'New User' });
+        
+        tl.download = function() {
+        
+          $('#plugauth_webui_csv_download').attr('href', PlugAuth.DL.data_to_uri({
+            type: 'text/csv',
+            content: PlugAuth.CSV.stringify([['user']].concat(tl.get_display_list()))
+          }));
+          
+          $('#plugauth_webui_csv_download').attr('download', 'plugauth_users.csv');
+          
+          return true;
+        
+        };
+        
         tl.callback = function(user, pane) {
           var index = counter++;
           pane.html('<h3>' + user + '</h3>'
@@ -53,7 +67,7 @@ $(document).ready(function ()
             widget.attr('disabled', 'disabled');
             return widget;
           });
-
+          
           if(user == client.user)
           {
             $('#plugauth_webui_remove_user_button_' + index).attr('disabled', 'disabled');
