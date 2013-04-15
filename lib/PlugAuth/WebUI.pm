@@ -65,7 +65,7 @@ Returns the stash data needed to generate the html from the ep template.
 sub get_data
 {
   my $data = {
-    js                  => [ 'jquery.base64.min.js', 'bootstrap-datepicker.js' ],
+    js                  => [ ],
     title               => 'PlugAuth WebUI',
     description         => 'PlugAuth server Web user interface',
     plugauth_webui_data => { skip_login => 0 },
