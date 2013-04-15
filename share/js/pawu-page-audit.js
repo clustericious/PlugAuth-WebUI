@@ -18,79 +18,80 @@ $(document).ready(function()
   var page = new PlugAuth.UI.Page('audit', 'accounts', 'audit');
   page.select = function()
   {
-    $('#plugauth_webui_toolbar').html(
-      '  <a ' +
-      '     href="#" ' +
-      '     class="btn smal" ' +
-      '     id="plugauth_webui_audit_date_button" ' +
-      '     data-date-format="yyyy-mm-dd" ' +
-      '     data-date="2012-02-12">Today</a>' +
-      '  <a href="#" class="btn small" id="plugauth_webui_audit_download">CSV</a>'
-    );
-    $('#plugauth_webui_container').html(
-      '<table class="table table-striped">' +
-      '  <thead>' +
-      '    <tr>' +
-      '      <th>time</th>' +
-      '      <th>admin</th>' +
-      '      <th>event</th>' +
-      '      <th>user/group</th>' +
-      '      <th>arguments</th>' +
-      '    </tr>' +
-      '  </thead>' +
-      '  <tbody id="plugauth_webui_audit_table_body">' +
-      '  </tbody>' +
-      '</table>'
-    );
-    
-    $('#plugauth_webui_audit_download').click(function() {
-      $('#plugauth_webui_audit_download').attr('href', PlugAuth.DL.data_to_uri({
-          type: 'text/csv',
-          content: PlugAuth.CSV.stringify(csv_data)
-      }));
-      return true;
-    });
-    
-    /* FIXME: if the server and client have a different idea
-       about what the current date is this visuall be wrong,
-       though you will see the current date's audit log regardless */    
-    $('#plugauth_webui_audit_date_button').attr('data-date',
-      date_to_string(new Date)
-    );
-    $('#plugauth_webui_audit_date_button').html(
-      date_to_string(new Date)
-    );
-    $('#plugauth_webui_audit_download').attr('download',
-      'plugauth_audit_log_' + date_to_string(new Date) + '.csv'
-    );
-    
     clear();
     var client = this.client;
-    client.audit_today()
-      .error(fetch_audit_bad)
-      .success(fetch_audit_good);
+
+    client.audit_check()
+      .success(function(check) {
+
+        $('#plugauth_webui_toolbar').html(
+          '  <a ' +
+          '     href="#" ' +
+          '     class="btn smal" ' +
+          '     id="plugauth_webui_audit_date_button" ' +
+          '     data-date-format="yyyy-mm-dd" ' +
+          '     data-date="2012-02-12">2012-02-12</a>' +
+          '  <a href="#" class="btn small" id="plugauth_webui_audit_download">CSV</a>'
+        );
+        $('#plugauth_webui_container').html(
+          '<table class="table table-striped">' +
+          '  <thead>' +
+          '    <tr>' +
+          '      <th>time</th>' +
+          '      <th>admin</th>' +
+          '      <th>event</th>' +
+          '      <th>user/group</th>' +
+          '      <th>arguments</th>' +
+          '    </tr>' +
+          '  </thead>' +
+          '  <tbody id="plugauth_webui_audit_table_body">' +
+          '  </tbody>' +
+          '</table>'
+        );
     
-    var widget;
-    widget = $('#plugauth_webui_audit_date_button').datepicker({
-      onRender: function(date) {
-        return '';
-      }
-    }).on('changeDate', function(ev) {
-      widget.hide();
-      var date = convert_date(ev.date);
-      clear();
-      client.audit(date.year, date.month, date.day)
-        .error(fetch_audit_bad)
-        .success(fetch_audit_good);
+        $('#plugauth_webui_audit_download').click(function() {
+          $('#plugauth_webui_audit_download').attr('href', PlugAuth.DL.data_to_uri({
+              type: 'text/csv',
+              content: PlugAuth.CSV.stringify(csv_data)
+          }));
+          return true;
+        });
+    
+        alert(check.today);
+        $('#plugauth_webui_audit_date_button').attr('data-date', check.today);
+        $('#plugauth_webui_audit_date_button').html(check.today);
+        $('#plugauth_webui_audit_download').attr('download',
+          'plugauth_audit_log_' + check.today + '.csv'
+        );
 
-      $('#plugauth_webui_audit_date_button').html(
-        date_to_string(ev.date)
-      );
-      $('#plugauth_webui_audit_download').attr('download',
-        'audit_log_' + date_to_string(ev.date) + '.csv'
-      );
+        var widget;
+        widget = $('#plugauth_webui_audit_date_button').datepicker({
+          onRender: function(date) {
+            return '';
+          }
+        }).on('changeDate', function(ev) {
+          widget.hide();
+          var date = convert_date(ev.date);
+          clear();
+          client.audit(date.year, date.month, date.day)
+            .error(fetch_audit_bad)
+            .success(fetch_audit_good);
+    
+          $('#plugauth_webui_audit_date_button').html(
+            date_to_string(ev.date)
+          );
+          $('#plugauth_webui_audit_download').attr('download',
+            'audit_log_' + date_to_string(ev.date) + '.csv'
+          );
+    
+        }).data('datepicker');
 
-    }).data('datepicker');
+        var today_list = check.today.split('-');
+        client.audit(today_list[0], today_list[1], today_list[2])
+          .error(fetch_audit_bad)
+          .success(fetch_audit_good);
+      })
+      .error(fetch_audit_bad);
         
   };
   
