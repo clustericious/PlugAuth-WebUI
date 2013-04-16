@@ -142,7 +142,7 @@ $(document).ready(function()
     
       $('#plugauth_webui_audit_table_body').append(
         '<tr>' +
-        '  <td>' + element.time_human + '</td>' +
+        '  <td style="white-space:nowrap;">' + element.time_human + '</td>' +
         '  <td>' + element.admin      + '</td>' +
         '  <td>' + element.event      + '</td>' +
         '  <td>' + user               + '</th>' +
