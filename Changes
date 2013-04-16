@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+0.08      2013-04-16 06:42:14 America/New_York
   - rm alert() debug
 
 0.07      2013-04-15 16:27:17 America/New_York
