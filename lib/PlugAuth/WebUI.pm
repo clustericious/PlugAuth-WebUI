@@ -8,7 +8,7 @@ use Path::Class::File;
 use File::ShareDir qw( dist_dir );
 
 # ABSTRACT: JavaScript WebUI for PlugAuth
-our $VERSION = '0.07'; # VERSION
+our $VERSION = '0.08'; # VERSION
 
 
 # FIXME: add a way to force non minified version of the js
@@ -83,7 +83,7 @@ PlugAuth::WebUI - JavaScript WebUI for PlugAuth
 
 =head1 VERSION
 
-version 0.07
+version 0.08
 
 =head1 FUNCTIONS
 

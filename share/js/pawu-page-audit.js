@@ -57,7 +57,6 @@ $(document).ready(function()
           return true;
         });
     
-        alert(check.today);
         $('#plugauth_webui_audit_date_button').attr('data-date', check.today);
         $('#plugauth_webui_audit_date_button').html(check.today);
         $('#plugauth_webui_audit_download').attr('download',

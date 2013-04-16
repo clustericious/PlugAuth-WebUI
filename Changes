@@ -1,6 +1,10 @@
 Revision history for PlugAuth-WebUI
 
+0.08      2013-04-16 06:42:14 America/New_York
+  - rm alert() debug
+
 0.07      2013-04-15 16:27:17 America/New_York
+  - get today info without redirect (which doesn't quite work with acpsweb)
 
 0.06      2013-04-15 13:52:44 America/New_York
   - support for the PlugAuth Audit plugin, if it is available.
