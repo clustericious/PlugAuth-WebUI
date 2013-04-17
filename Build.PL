@@ -18,7 +18,7 @@ my %module_build_args = (
     "Graham Ollis <graham.a.ollis\@nasa.gov>"
   ],
   "dist_name" => "PlugAuth-WebUI",
-  "dist_version" => "0.08",
+  "dist_version" => "0.09",
   "license" => "perl",
   "module_name" => "PlugAuth::WebUI",
   "recommends" => {},

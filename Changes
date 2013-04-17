@@ -1,5 +1,8 @@
 Revision history for PlugAuth-WebUI
 
+0.09      2013-04-17 02:28:16 America/New_York
+  - don't break on space in audit time column
+
 0.08      2013-04-16 06:42:14 America/New_York
   - rm alert() debug
 
