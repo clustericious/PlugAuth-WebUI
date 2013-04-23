@@ -1,5 +1,9 @@
 Revision history for PlugAuth-WebUI
 
+0.10      2013-04-23 17:16:12 America/New_York
+  - use MakeMaker instead of ModuleBuild
+  - use [ACPS::RPM]
+
 0.09      2013-04-17 02:28:16 America/New_York
   - don't break on space in audit time column
 

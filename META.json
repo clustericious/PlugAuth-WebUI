@@ -4,7 +4,7 @@
       "Graham Ollis <graham.a.ollis@nasa.gov>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Zilla version 4.300031, CPAN::Meta::Converter version 2.120921",
+   "generated_by" : "Dist::Zilla version 4.300021, CPAN::Meta::Converter version 2.120921",
    "license" : [
       "perl_5"
    ],
@@ -14,14 +14,10 @@
    },
    "name" : "PlugAuth-WebUI",
    "prereqs" : {
-      "build" : {
-         "requires" : {
-            "Module::Build" : "0.3601"
-         }
-      },
       "configure" : {
          "requires" : {
-            "Module::Build" : "0.3601"
+            "ExtUtils::MakeMaker" : "6.30",
+            "File::ShareDir::Install" : "0.03"
          }
       },
       "runtime" : {
@@ -42,6 +38,6 @@
       }
    },
    "release_status" : "stable",
-   "version" : "0.09"
+   "version" : "0.10"
 }
 

@@ -8,7 +8,7 @@ use Path::Class::File;
 use File::ShareDir qw( dist_dir );
 
 # ABSTRACT: JavaScript WebUI for PlugAuth
-our $VERSION = '0.09'; # VERSION
+our $VERSION = '0.10'; # VERSION
 
 
 # FIXME: add a way to force non minified version of the js
@@ -73,8 +73,8 @@ sub get_data
 
 1;
 
-__END__
 
+__END__
 =pod
 
 =head1 NAME
@@ -83,7 +83,7 @@ PlugAuth::WebUI - JavaScript WebUI for PlugAuth
 
 =head1 VERSION
 
-version 0.09
+version 0.10
 
 =head1 FUNCTIONS
 
@@ -149,3 +149,4 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
+
