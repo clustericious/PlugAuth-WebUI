@@ -28,7 +28,6 @@ if(PlugAuth.UI === undefined) PlugAuth.UI = {};
 
     list = list.sort();
     this.list = list;
-    this.display_list = list;
     
     $.each(list, function(index, value) {
       nav_html += '<li id="plugauth_webui_tab_nav_' + index + '">'
@@ -74,7 +73,6 @@ if(PlugAuth.UI === undefined) PlugAuth.UI = {};
   
   PlugAuth.UI.TabList.prototype.search = function(text)
   {
-    var display_list = this.display_list = [];
     $.each(this.list, function(index, value) {
       if(value.indexOf(text) == -1)
       {
@@ -85,14 +83,21 @@ if(PlugAuth.UI === undefined) PlugAuth.UI = {};
       else
       {
         $('#plugauth_webui_tab_nav_' + index).show();
-        display_list.push(value);
       }
     });
   }
   
   PlugAuth.UI.TabList.prototype.get_display_list = function()
   {
-    return this.display_list;
+    var list = [];
+    $('ul#plugauth_webui_tab_nav li').each(function(index, li) {
+      if(! $(li).is(":visible"))
+        return;
+      $(li).children('a').each(function(index, a) {
+        list.push($(a).html());
+      });
+    });
+    return list;
   }
   
   PlugAuth.UI.TabList.prototype.append = function(value)
@@ -103,7 +108,6 @@ if(PlugAuth.UI === undefined) PlugAuth.UI = {};
       +                                 label(value) + '</a></li>');
     $('#plugauth_webui_tab_content').append('<div class="tab-pane" id="plugauth_webui_tab_content_' + index + '"></div>');
     this.list.push(value);
-    this.display_list.push(value);
     var tl = this;
     var content = $('#plugauth_webui_tab_content_'+index);
     $('#plugauth_webui_tab_nav_a_' + index).click(function() { tl.callback(value, content); return true });
@@ -117,7 +121,6 @@ if(PlugAuth.UI === undefined) PlugAuth.UI = {};
       +                                 label(value) + '</a></li>');
     $('#plugauth_webui_tab_content').prepend('<div class="tab-pane" id="plugauth_webui_tab_content_' + index + '"></div>');
     this.list.push(value);
-    this.display_list.unshift(value);
     var tl = this;
     var content = $('#plugauth_webui_tab_content_'+index);
     $('#plugauth_webui_tab_nav_a_' + index).click(function() { tl.callback(value, content); return true });
@@ -125,16 +128,11 @@ if(PlugAuth.UI === undefined) PlugAuth.UI = {};
   
   PlugAuth.UI.TabList.prototype.remove = function(search_value)
   {
-    var display_list = this.display_list = [];
     $.each(this.list, function(index, value) {
       if(value == search_value)
       {
         $('#plugauth_webui_tab_nav_' + index).remove();
         $('#plugauth_webui_tab_content_' + index).remove();
-      }
-      else if($('#plugauth_webui_tab_nav_' + index).css('display') != 'none')
-      {
-        display_list.push(value);
       }
     });
   }
