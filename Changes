@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+0.11      2013-04-26 11:43:26 EST5EDT
   - fixed selection bug where user/group is added and no
     user/group is selected
   - show group list and reousrce list on the user page
