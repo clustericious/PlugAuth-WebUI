@@ -60,7 +60,34 @@ $(document).ready(function ()
           +         '<button class="span3 btn btn-primary" type="button" id="plugauth_webui_change_password_' + index + '_submit" style="margin-left:0">Change Password</button><br/>'
           +         '<br/>'
           +         '<button class="span3 btn btn-danger" id="plugauth_webui_remove_user_button_' + index + '" style="margin-left:0" >Remove User</button>'
-          +         '</form>');
+          +         '</form>'
+          +         '<table id="plugauth_webui_group_list_' + index + '" class="table table-striped"><thead><tr><th>group</th></tr></thead><tbody></tbody></table>'
+          +         '<table id="plugauth_webui_resource_list_' + index + '" class="table table-striped">'
+          +         '<thead><tr><th>resource</th><th>action</th></tr></thead><tbody></tbody>'
+          +         '</table>');
+          
+          client.groups(user)
+            .success(function(data) {
+              data.forEach(function(group) {
+                $('#plugauth_webui_group_list_' + index + ' tbody').append('<tr><td>' + group + '</td><tr>');
+              });
+            });
+          
+          client.granted()
+            .success(function(list) {
+              list.forEach(function(line) {
+                var found = false;
+                line.split(":")[1].split(',').forEach(function(item) {
+                  item = item.replace(/^\s+/,'').replace(/\s+$/,'');
+                  if(user === item || item === '#u')
+                    found = true;
+                });
+                if(! found)
+                  return;
+                var match = line.match(/^(.*)\s+\((.*)\)/);
+                $('#plugauth_webui_resource_list_' + index + ' tbody').append('<tr><td>' + match[1] + '</td><td>' + match[2] + '</td></tr>');
+              });
+            });
           
           var change_password_widgets = $.map([ 'password', 'confirm', 'submit' ], function(value, mapindex) {
             var widget = $('#plugauth_webui_change_password_' + index + '_' + value);
