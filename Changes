@@ -3,6 +3,7 @@ Revision history for {{$dist->name}}
 {{$NEXT}}
   - fixed selection bug where user/group is added and no
     user/group is selected
+  - show group list and reousrce list on the user page
 
 0.10      2013-04-23 17:16:12 America/New_York
   - use MakeMaker instead of ModuleBuild
