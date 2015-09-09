@@ -19,7 +19,7 @@ directory that contains the web UI for PlugAuth.
 
 =cut
 
-# FIXME: add a way to force non minified version of the js
+# TODO:  add a way to force non minified version of the js
 #        and expose this in the PlugAuth::Plugin::WebUI config
 
 sub share_dir
