@@ -1,0 +1,5 @@
+ExtUtils::MakeMaker
+File::ShareDir
+File::ShareDir::Install
+Path::Class
+Test::More

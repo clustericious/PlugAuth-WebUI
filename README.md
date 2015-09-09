@@ -1,34 +1,30 @@
-=head1 NAME
+# PlugAuth::WebUI
 
-PlugAuth::WebUI - JavaScript WebUI for PlugAuth
+JavaScript WebUI for PlugAuth
 
-=head1 VERSION
+# FUNCTIONS
 
-version 0.11
+## PlugAuth::WebUI->share\_dir
 
-=head1 FUNCTIONS
-
-=head2 PlugAuth::WebUI->share_dir
-
-Returns an instance of L<Path::Class::Dir> which points to the
+Returns an instance of [Path::Class::Dir](https://metacpan.org/pod/Path::Class::Dir) which points to the
 directory that contains the web UI for PlugAuth.
 
-=head2 PlugAuth::WebUI->get_data
+## PlugAuth::WebUI->get\_data
 
 Returns the stash data needed to generate the html from the ep template.
 
-=head1 BUNDLED FILES
+# BUNDLED FILES
 
 This distribution includes a few files with different licenses that have been bundled for the
 implementation of the PlugAuth WebUI.
 
-=head2 jQuery
+## jQuery
 
 Copyright (c) 2012 jQuery Foundation and other contributors, http://jquery.org/
 
 Licensed under the MIT License
 
-=head2 jQuery base64 plugin
+## jQuery base64 plugin
 
 Original code (c) 2010 Nick Galbreath
 
@@ -36,13 +32,13 @@ jQuery port (c) 2010 Carlo Zottmann
 
 Licensed under the MIT License
 
-=head2 Twitter Bootstrap
+## Twitter Bootstrap
 
 Copyright 2012 Twitter, Inc.
 
 Licensed under the Apache 2.0 License
 
-=head2 Bootstrap Date Picker
+## Bootstrap Date Picker
 
 http://www.eyecon.ro/bootstrap-datepicker/
 
@@ -50,22 +46,21 @@ Copyright 2012 Stefan Petre
 
 Licensed under the Apache 2.0 License
 
-=head2 cvs-string
+## cvs-string
 
 https://npmjs.org/package/csv-string
 
-Copyright 2011 Nicolas Thouvenin <nthouvenin@gmail.com>
+Copyright 2011 Nicolas Thouvenin &lt;nthouvenin@gmail.com>
 
 Licensed under the MIT/X11 license
 
-=head1 AUTHOR
+# AUTHOR
 
-Graham Ollis <graham.a.ollis@nasa.gov>
+Graham Ollis &lt;graham.a.ollis@nasa.gov>
 
-=head1 COPYRIGHT AND LICENSE
+# COPYRIGHT AND LICENSE
 
 This software is copyright (c) 2012 by NASA GSFC.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
-
