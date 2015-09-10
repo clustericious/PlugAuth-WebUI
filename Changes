@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+0.12      2015-09-10 11:16:25 -0400
   - Switch from Mojo::JSON to JSON::PP for stability
 
 0.11      2013-04-26 11:43:26 EST5EDT
