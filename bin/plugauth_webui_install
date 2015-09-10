@@ -2,7 +2,7 @@
 
 use strict;
 use warnings;
-use v5.10;
+use 5.012;
 use PlugAuth::WebUI;
 use Getopt::Long qw( GetOptions );
 use File::Copy qw( copy );

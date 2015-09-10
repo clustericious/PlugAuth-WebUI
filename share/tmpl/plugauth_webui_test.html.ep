@@ -8,7 +8,8 @@
   <body>
     <div id="qunit"></div>
     
-    <input type="hidden" id="plugauth_webui_data" name="plugauth_webui_data" value="<%= Mojo::JSON->new->encode($plugauth_webui_data) %>" />
+% use JSON::PP qw( encode_json );
+    <input type="hidden" id="plugauth_webui_data" name="plugauth_webui_data" value="<%= encode_json($plugauth_webui_data) %>" />
     
     <script src="<%= url_for 'plugauth_webui_static', type => 'js', file => 'qunit-1.10.0.js' %>"></script>
     

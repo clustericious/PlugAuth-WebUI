@@ -2,7 +2,7 @@ package PlugAuth::WebUI;
 
 use strict;
 use warnings;
-use v5.10;
+use 5.012;
 use Path::Class::Dir;
 use Path::Class::File;
 use File::ShareDir qw( dist_dir );

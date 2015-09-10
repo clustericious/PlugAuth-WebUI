@@ -38,7 +38,8 @@
       </div>
     </div>
 
-%= hidden_field plugauth_webui_data => Mojo::JSON->new->encode($plugauth_webui_data), id => 'plugauth_webui_data';
+% use JSON::PP qw( encode_json );
+%= hidden_field plugauth_webui_data => encode_json($plugauth_webui_data), id => 'plugauth_webui_data';
 
     <div class="container">
 

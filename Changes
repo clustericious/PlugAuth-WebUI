@@ -1,8 +1,7 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
-
-0.11      2015-09-10 10:42:03 -0400
+  - Switch from Mojo::JSON to JSON::PP for stability
 
 0.11      2013-04-26 11:43:26 EST5EDT
   - fixed selection bug where user/group is added and no
