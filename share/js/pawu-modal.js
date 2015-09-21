@@ -4,6 +4,10 @@ if(PlugAuth.UI === undefined) PlugAuth.UI = {};
 (function ()
 {
   var counter = 0;
+  
+  var bootstrap_version = JSON.parse($('#plugauth_webui_data').val()).bootstrap_version;
+  if(bootstrap_version === undefined)
+    bootstrap_version = 2;
 
   PlugAuth.UI.Modal = function(title)
   {
@@ -11,22 +15,44 @@ if(PlugAuth.UI === undefined) PlugAuth.UI = {};
     this.index = counter++;
     this.ready = false;
 
-    $('body').append('<div class="modal hide fade" id="plugauth_webui_modal_' + this.index + '">'
-    +                '  <div class="modal-header">'
-    +                '    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>'
-    +                '    <h3>' + title + '</h3>'
-    +                '  </div>'
-    +                '  <div class="modal-body" id="plugauth_webui_modal_' + this.index + '_body">'
-    +                '  </div>'
-    +                '  <div class="modal-footer" id="plugauth_webui_modal_' + this.index + '_footer">'
-    +                '    <a href="#" class="btn" id="plugauth_webui_modal_' + this.index + '_close">Close</a>'
-    +                '  </div>'
-    +                '</div>');
+    if(bootstrap_version == 3)
+    {
+      $('body').append('<div class="modal fade" id="plugauth_webui_modal_' + this.index + '">'
+      +                '  <div class="modal-dialog">'
+      +                '    <div class="modal-content">'
+      +                '      <div class="modal-header">'
+      +                '        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>'
+      +                '        <h4>' + title + '</h4>'
+      +                '      </div>'
+      +                '      <div class="modal-body" id="plugauth_webui_modal_' + this.index + '_body">'
+      +                '      </div>'
+      +                '      <div class="modal-footer" id="plugauth_webui_modal_' + this.index + '_footer">'
+      +                '        <button class="btn btn-default" data-dismiss="modal" id="plugauth_webui_modal_' + this.index + '_close">Close</a>'
+      +                '      </div>'
+      +                '    </div>'
+      +                '  </div>'
+      +                '</div>');
+    }
+    else 
+    {
+      $('body').append('<div class="modal hide fade" id="plugauth_webui_modal_' + this.index + '">'
+      +                '  <div class="modal-header">'
+      +                '    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>'
+      +                '    <h3>' + title + '</h3>'
+      +                '  </div>'
+      +                '  <div class="modal-body" id="plugauth_webui_modal_' + this.index + '_body">'
+      +                '  </div>'
+      +                '  <div class="modal-footer" id="plugauth_webui_modal_' + this.index + '_footer">'
+      +                '    <a href="#" class="btn" id="plugauth_webui_modal_' + this.index + '_close">Close</a>'
+      +                '  </div>'
+      +                '</div>');
 
-    var modal = this;
-    $('#plugauth_webui_modal_' + this.index + '_close').click(function() {
-      modal.hide();
-    });
+      var modal = this;
+      $('#plugauth_webui_modal_' + this.index + '_close').click(function() {
+        modal.hide();
+      });
+    }
+
   }
   
   PlugAuth.UI.Modal.prototype.html = function(html)
