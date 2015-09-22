@@ -79,6 +79,13 @@ if(PlugAuth.UI === undefined) PlugAuth.UI = {};
       $('#plugauth_webui_tab_nav_a_' + index).click(function() { 
         if(content.html() == '')
           tl.callback(value, content); 
+        if(bootstrap_version == 3)
+        {
+          $.each(list, function(index, value) {
+            $('#plugauth_webui_tab_content_' + index).hide();
+          });
+          content.show();
+        }
         return true;
       });
     });
@@ -99,7 +106,11 @@ if(PlugAuth.UI === undefined) PlugAuth.UI = {};
       {
         $('#plugauth_webui_tab_nav_' + index).hide();
         $('#plugauth_webui_tab_nav_' + index).removeClass('active');
-        $('#plugauth_webui_tab_content_' + index).removeClass('active');
+        var content = $('#plugauth_webui_tab_content_' + index);
+        if(bootstrap_version == 3)
+          content.hide();
+        else
+          content.removeClass('active');
       }
       else
       {
