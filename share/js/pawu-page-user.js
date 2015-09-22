@@ -142,6 +142,12 @@ $(document).ready(function ()
         };
         tl.create = function() {
           create_user_modal.show();
+          create_user_modal.user.val('');
+          create_user_modal.pass.val('');
+          create_user_modal.confirm.val('');
+          create_user_modal.form.show();
+          create_user_modal.message.hide();
+          create_user_modal.create_button.removeAttr('disabled');
         };
         
         page.create_user = function() {
@@ -192,14 +198,14 @@ $(document).ready(function ()
   create_user_modal.create_button = create_user_modal.add_button('Create', 'btn-primary');
   create_user_modal.create_button.click(function() {page.create_user() });
   
-  create_user_modal.on('show', function() {
-    create_user_modal.user.val('');
-    create_user_modal.pass.val('');
-    create_user_modal.confirm.val('');
-    create_user_modal.form.show();
-    create_user_modal.message.hide();
-    create_user_modal.create_button.removeAttr('disabled');
-  });
+  //create_user_modal.on('show', function() {
+  //  create_user_modal.user.val('');
+  //  create_user_modal.pass.val('');
+  //  create_user_modal.confirm.val('');
+  //  create_user_modal.form.show();
+  //  create_user_modal.message.hide();
+  //  create_user_modal.create_button.removeAttr('disabled');
+  //});
   
   create_user_modal.on('shown', function() {
     create_user_modal.user.focus();
