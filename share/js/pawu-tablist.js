@@ -5,6 +5,10 @@ if(PlugAuth.UI === undefined) PlugAuth.UI = {};
 {
   var max_label_length = 25;
 
+  var bootstrap_version = JSON.parse($('#plugauth_webui_data').val()).bootstrap_version;
+  if(bootstrap_version === undefined)
+    bootstrap_version = 2;
+
   var label = function(name)
   {
     var label = name;
@@ -35,19 +39,36 @@ if(PlugAuth.UI === undefined) PlugAuth.UI = {};
       +           label(value) + '</a></li>';
       pane_html += '<div class="tab-pane" id="plugauth_webui_tab_content_' + index + '"></div>';
     });
+
+    if(bootstrap_version == 3)
+    {
+      $('#plugauth_webui_toolbar').html('<form class="navbar-form pull-left">'
+      +                                   '<input type="text" placeholder="Search" id="plugauth_webui_tab_search">'
+      +                                   '</form><form class="navbar-form pull-left">'
+      +                                   '<button class="btn" id="plugauth_webui_tab_create">' + opts.new_label + '</button>'
+      +                                   '<a href="#" class="btn small" id="plugauth_webui_csv_download">CSV</a>'
+      +                                   '</form>');
     
-    $('#plugauth_webui_toolbar').html('<form class="navbar-form pull-left">'
-    +                                   '<input type="text" placeholder="Search" id="plugauth_webui_tab_search">'
-    +                                   '</form><form class="navbar-form pull-left">'
-    +                                   '<button class="btn" id="plugauth_webui_tab_create">' + opts.new_label + '</button>'
-    +                                   '<a href="#" class="btn small" id="plugauth_webui_csv_download">CSV</a>'
-    +                                   '</form>');
+      $('#plugauth_webui_container').html('<ul class="nav nav-pills nav-stacked col-md-2" id="plugauth_webui_tab_nav">'
+      +                                   nav_html + '</ul>'
+      +                                   '<div class="col-md-10" id="plugauth_webui_tab_content">'
+      +                                   pane_html + '</div>');
+    }
+    else
+    {
+      $('#plugauth_webui_toolbar').html('<form class="navbar-form pull-left">'
+      +                                   '<input type="text" placeholder="Search" id="plugauth_webui_tab_search">'
+      +                                   '</form><form class="navbar-form pull-left">'
+      +                                   '<button class="btn" id="plugauth_webui_tab_create">' + opts.new_label + '</button>'
+      +                                   '<a href="#" class="btn small" id="plugauth_webui_csv_download">CSV</a>'
+      +                                   '</form>');
     
-    $('#plugauth_webui_container').html('<div class="tabbable tabs-left">'
-    +                                   '<ul class="nav nav-tabs" id="plugauth_webui_tab_nav">'
-    +                                   nav_html + '</ul>'
-    +                                   '<div class="tab-content" id="plugauth_webui_tab_content">'
-    +                                   pane_html + '</div></div>');
+      $('#plugauth_webui_container').html('<div class="tabbable tabs-left">'
+      +                                   '<ul class="nav nav-tabs" id="plugauth_webui_tab_nav">'
+      +                                   nav_html + '</ul>'
+      +                                   '<div class="tab-content" id="plugauth_webui_tab_content">'
+      +                                   pane_html + '</div></div>');
+    }
     
     this.callback = function() {};
     this.create = function() {};
