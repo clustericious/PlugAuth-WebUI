@@ -50,13 +50,13 @@ Licensed under the Apache 2.0 License
 
 https://npmjs.org/package/csv-string
 
-Copyright 2011 Nicolas Thouvenin <nthouvenin@gmail.com>
+Copyright 2011 Nicolas Thouvenin &lt;nthouvenin@gmail.com>
 
 Licensed under the MIT/X11 license
 
 # AUTHOR
 
-Graham Ollis <graham.a.ollis@nasa.gov>
+Graham Ollis &lt;graham.a.ollis@nasa.gov>
 
 # COPYRIGHT AND LICENSE
 
