@@ -1,4 +1,4 @@
-# PlugAuth::WebUI
+# PlugAuth::WebUI [![Build Status](https://secure.travis-ci.org/clustericious/PlugAuth-WebUI.png)](http://travis-ci.org/clustericious/PlugAuth-WebUI)
 
 JavaScript WebUI for PlugAuth
 
