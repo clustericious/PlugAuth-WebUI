@@ -1,6 +1,0 @@
-ExtUtils::MakeMaker
-File::ShareDir
-File::ShareDir::Install
-JSON::PP
-Path::Class
-Test::More

@@ -5,7 +5,7 @@ use warnings;
 use 5.010;
 use Path::Class::Dir;
 use Path::Class::File;
-use File::ShareDir qw( dist_dir );
+use File::ShareDir::Dist qw( dist_share );
 
 # ABSTRACT: JavaScript WebUI for PlugAuth
 # VERSION
@@ -25,35 +25,7 @@ directory that contains the web UI for PlugAuth.
 sub share_dir
 {
   state $path;
-
-  unless(defined $path)
-  {
-    # if $VERSION is not defind then we've added the lib
-    # directory to PERL5LIB, and we should find the share
-    # directory relative to the WebUI.pm module which is
-    # still in its dist.  Otherwise, we can use File::ShareDir
-    # to find the distributions share directory for this
-    # distribution.
-    if(defined $PlugAuth::WebUI::VERSION)
-    {
-      # prod
-      $path = Path::Class::Dir
-        ->new(dist_dir('PlugAuth-WebUI'));
-    }
-    else
-    {
-      # dev
-      $path = Path::Class::File
-        ->new($INC{'PlugAuth/WebUI.pm'})
-        ->absolute
-        ->dir
-        ->parent
-        ->parent
-        ->subdir('share');
-    }
-  }
-  
-  $path;
+  $path //= Path::Class::Dir->new(dist_share('PlugAuth-WebUI')) or die "unable to find share directory";
 }
 
 =head2 PlugAuth::WebUI->get_data
